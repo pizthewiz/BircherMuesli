@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  BircherMuesli
+
+  Created by Jean-Pierre Mouilleseaux on 27 May 2011.
+  Copyright 2011 Chorded Constructions. All rights reserved.
+*/
+
+"kQCPlugIn_Name" = "Serial Something";
+"kQCPlugIn_Description" = "It does something";

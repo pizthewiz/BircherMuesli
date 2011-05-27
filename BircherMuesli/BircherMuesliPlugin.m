@@ -15,7 +15,11 @@
 @implementation BircherMuesliPlugIn
 
 + (NSDictionary*)attributes{
-	return [NSDictionary dictionaryWithObjectsAndKeys:kQCPlugIn_Name, QCPlugInAttributeNameKey, kQCPlugIn_Description, QCPlugInAttributeDescriptionKey, nil];
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+        CCLocalizedString(@"kQCPlugIn_Name", NULL), QCPlugInAttributeNameKey, 
+        CCLocalizedString(@"kQCPlugIn_Description", NULL), QCPlugInAttributeDescriptionKey, 
+        // TODO - add QCPlugInAttributeCategoriesKey and QCPlugInAttributeExamplesKey
+        nil];
 }
 
 + (NSDictionary*)attributesForPropertyPortWithKey:(NSString*)key {
