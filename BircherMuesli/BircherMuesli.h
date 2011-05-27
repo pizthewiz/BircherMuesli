@@ -9,9 +9,11 @@
 #ifdef DEBUG
     #define CCDebugLogSelector() NSLog(@"-[%@ %@]", /*NSStringFromClass([self class])*/self, NSStringFromSelector(_cmd))
     #define CCDebugLog(a...) NSLog(a)
+    #define CCErrorLog(a...) NSLog(a)
 #else
     #define CCDebugLogSelector()
     #define CCDebugLog(a...)
+    #define CCErrorLog(a...) NSLog(a)
 #endif
 
 #define CCLocalizedString(key, comment) [[NSBundle bundleForClass:[self class]] localizedStringForKey:(key) value:@"" table:(nil)]
