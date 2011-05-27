@@ -12,6 +12,10 @@
 		D8AFA9B5138F406D001FE2A5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8AFA9B3138F406D001FE2A5 /* InfoPlist.strings */; };
 		D8AFA9B9138F406D001FE2A5 /* BircherMuesliPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9B8138F406D001FE2A5 /* BircherMuesliPlugin.m */; };
 		D8AFA9E813906264001FE2A5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8AFA9E713906264001FE2A5 /* Localizable.strings */; };
+		D8AFAA0C139069F1001FE2A5 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFAA011390697B001FE2A5 /* IOKit.framework */; };
+		D8AFAA0D13906A06001FE2A5 /* AMSerialPortList.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9F313906847001FE2A5 /* AMSerialPortList.m */; };
+		D8AFAA0E13906A1C001FE2A5 /* AMSerialPort.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9ED13906847001FE2A5 /* AMSerialPort.m */; };
+		D8AFAA0F13906A20001FE2A5 /* AMStandardEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9F713906847001FE2A5 /* AMStandardEnumerator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +49,7 @@
 		D8AFA9F513906847001FE2A5 /* AMSerialPortList_Deprecated.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMSerialPortList_Deprecated.m; sourceTree = "<group>"; };
 		D8AFA9F613906847001FE2A5 /* AMStandardEnumerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMStandardEnumerator.h; sourceTree = "<group>"; };
 		D8AFA9F713906847001FE2A5 /* AMStandardEnumerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMStandardEnumerator.m; sourceTree = "<group>"; };
+		D8AFAA011390697B001FE2A5 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +59,7 @@
 			files = (
 				D8AFA9A7138F406D001FE2A5 /* Cocoa.framework in Frameworks */,
 				D8AFA9A9138F406D001FE2A5 /* Quartz.framework in Frameworks */,
+				D8AFAA0C139069F1001FE2A5 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +89,7 @@
 			children = (
 				D8AFA9A6138F406D001FE2A5 /* Cocoa.framework */,
 				D8AFA9A8138F406D001FE2A5 /* Quartz.framework */,
+				D8AFAA011390697B001FE2A5 /* IOKit.framework */,
 				D8AFA9AA138F406D001FE2A5 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -238,6 +245,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8AFA9B9138F406D001FE2A5 /* BircherMuesliPlugin.m in Sources */,
+				D8AFAA0E13906A1C001FE2A5 /* AMSerialPort.m in Sources */,
+				D8AFAA0F13906A20001FE2A5 /* AMStandardEnumerator.m in Sources */,
+				D8AFAA0D13906A06001FE2A5 /* AMSerialPortList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

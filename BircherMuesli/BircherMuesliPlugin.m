@@ -8,6 +8,7 @@
 
 #import "BircherMuesliPlugIn.h"
 #import "BircherMuesli.h"
+#import "AMSerialPortList.h"
 
 @implementation BircherMuesliPlugIn
 
@@ -36,7 +37,7 @@
 - (id)init {
 	self = [super init];
 	if (self) {
-	}	
+	}
 	return self;
 }
 
@@ -56,7 +57,12 @@
 	Called by Quartz Composer when rendering of the composition starts: perform any required setup for the plug-in.
 	Return NO in case of fatal failure (this will prevent rendering of the composition to start).
 	*/
-	
+
+    NSArray* serialPorts = [[AMSerialPortList sharedPortList] serialPorts];
+    for (AMSerialPort* serialPort in serialPorts) {
+        CCDebugLog(@"PORT:%@", serialPort);
+    }
+
 	return YES;
 }
 
