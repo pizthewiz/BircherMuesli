@@ -24,6 +24,10 @@
 		D8AFA9B6138F406D001FE2A5 /* BircherMuesli-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BircherMuesli-Prefix.pch"; sourceTree = "<group>"; };
 		D8AFA9B7138F406D001FE2A5 /* BircherMuesliPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BircherMuesliPlugin.h; sourceTree = "<group>"; };
 		D8AFA9B8138F406D001FE2A5 /* BircherMuesliPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BircherMuesliPlugin.m; sourceTree = "<group>"; };
+		D8AFA9D2138F4D9A001FE2A5 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = SOURCE_ROOT; };
+		D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = SOURCE_ROOT; };
+		D8AFA9D5138F4DA3001FE2A5 /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = SOURCE_ROOT; };
+		D8AFA9D6138F4DA3001FE2A5 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,10 @@
 				D8AFA9B7138F406D001FE2A5 /* BircherMuesliPlugin.h */,
 				D8AFA9B8138F406D001FE2A5 /* BircherMuesliPlugin.m */,
 				D8AFA9B1138F406D001FE2A5 /* Supporting Files */,
+				D8AFA9D2138F4D9A001FE2A5 /* README.markdown */,
+				D8AFA9D5138F4DA3001FE2A5 /* Rakefile */,
+				D8AFA9D6138F4DA3001FE2A5 /* TODO */,
+				D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG */,
 			);
 			path = BircherMuesli;
 			sourceTree = "<group>";
