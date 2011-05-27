@@ -28,6 +28,7 @@
 		D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = SOURCE_ROOT; };
 		D8AFA9D5138F4DA3001FE2A5 /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = SOURCE_ROOT; };
 		D8AFA9D6138F4DA3001FE2A5 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = SOURCE_ROOT; };
+		D8AFA9D7138F4E3B001FE2A5 /* BircherMuesli.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BircherMuesli.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +83,7 @@
 		D8AFA9B0138F406D001FE2A5 /* BircherMuesli */ = {
 			isa = PBXGroup;
 			children = (
+				D8AFA9D7138F4E3B001FE2A5 /* BircherMuesli.h */,
 				D8AFA9B7138F406D001FE2A5 /* BircherMuesliPlugin.h */,
 				D8AFA9B8138F406D001FE2A5 /* BircherMuesliPlugin.m */,
 				D8AFA9B1138F406D001FE2A5 /* Supporting Files */,

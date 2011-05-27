@@ -1,0 +1,17 @@
+//
+//  BircherMuesli.h
+//  BircherMuesli
+//
+//  Created by Jean-Pierre Mouilleseaux on 26 May 2011.
+//  Copyright 2011 Chorded Constructions. All rights reserved.
+//
+
+#ifdef DEBUG
+    #define CCDebugLogSelector() NSLog(@"-[%@ %@]", /*NSStringFromClass([self class])*/self, NSStringFromSelector(_cmd))
+    #define CCDebugLog(a...) NSLog(a)
+#else
+    #define CCDebugLogSelector()
+    #define CCDebugLog(a...)
+#endif
+
+#define CCLocalizedString(key, comment) [[NSBundle bundleForClass:[self class]] localizedStringForKey:(key) value:@"" table:(nil)]

@@ -2,11 +2,12 @@
 //  BircherMuesliPlugIn.m
 //  BircherMuesli
 //
-//  Created by Jean-Pierre Mouilleseaux on 5/26/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Jean-Pierre Mouilleseaux on 26 May 2011.
+//  Copyright 2011 Chorded Constructions. All rights reserved.
 //
 
 #import "BircherMuesliPlugIn.h"
+#import "BircherMuesli.h"
 
 #define	kQCPlugIn_Name				@"BircherMuesli"
 #define	kQCPlugIn_Description		@"BircherMuesli description"
