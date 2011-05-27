@@ -1,0 +1,282 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D8AFA9A7138F406D001FE2A5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFA9A6138F406D001FE2A5 /* Cocoa.framework */; };
+		D8AFA9A9138F406D001FE2A5 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFA9A8138F406D001FE2A5 /* Quartz.framework */; };
+		D8AFA9B5138F406D001FE2A5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8AFA9B3138F406D001FE2A5 /* InfoPlist.strings */; };
+		D8AFA9B9138F406D001FE2A5 /* BircherMuesliPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9B8138F406D001FE2A5 /* BircherMuesliPlugin.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D8AFA9A3138F406D001FE2A5 /* BircherMuesli.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BircherMuesli.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8AFA9A6138F406D001FE2A5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		D8AFA9A8138F406D001FE2A5 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		D8AFA9AB138F406D001FE2A5 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		D8AFA9AC138F406D001FE2A5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D8AFA9AD138F406D001FE2A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D8AFA9B2138F406D001FE2A5 /* BircherMuesli-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BircherMuesli-Info.plist"; sourceTree = "<group>"; };
+		D8AFA9B4138F406D001FE2A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D8AFA9B6138F406D001FE2A5 /* BircherMuesli-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BircherMuesli-Prefix.pch"; sourceTree = "<group>"; };
+		D8AFA9B7138F406D001FE2A5 /* BircherMuesliPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BircherMuesliPlugin.h; sourceTree = "<group>"; };
+		D8AFA9B8138F406D001FE2A5 /* BircherMuesliPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BircherMuesliPlugin.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D8AFA99F138F406D001FE2A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8AFA9A7138F406D001FE2A5 /* Cocoa.framework in Frameworks */,
+				D8AFA9A9138F406D001FE2A5 /* Quartz.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D8AFA997138F406D001FE2A5 = {
+			isa = PBXGroup;
+			children = (
+				D8AFA9B0138F406D001FE2A5 /* BircherMuesli */,
+				D8AFA9A5138F406D001FE2A5 /* Frameworks */,
+				D8AFA9A4138F406D001FE2A5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D8AFA9A4138F406D001FE2A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D8AFA9A3138F406D001FE2A5 /* BircherMuesli.plugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D8AFA9A5138F406D001FE2A5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D8AFA9A6138F406D001FE2A5 /* Cocoa.framework */,
+				D8AFA9A8138F406D001FE2A5 /* Quartz.framework */,
+				D8AFA9AA138F406D001FE2A5 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D8AFA9AA138F406D001FE2A5 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D8AFA9AB138F406D001FE2A5 /* AppKit.framework */,
+				D8AFA9AC138F406D001FE2A5 /* CoreData.framework */,
+				D8AFA9AD138F406D001FE2A5 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		D8AFA9B0138F406D001FE2A5 /* BircherMuesli */ = {
+			isa = PBXGroup;
+			children = (
+				D8AFA9B7138F406D001FE2A5 /* BircherMuesliPlugin.h */,
+				D8AFA9B8138F406D001FE2A5 /* BircherMuesliPlugin.m */,
+				D8AFA9B1138F406D001FE2A5 /* Supporting Files */,
+			);
+			path = BircherMuesli;
+			sourceTree = "<group>";
+		};
+		D8AFA9B1138F406D001FE2A5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D8AFA9B2138F406D001FE2A5 /* BircherMuesli-Info.plist */,
+				D8AFA9B3138F406D001FE2A5 /* InfoPlist.strings */,
+				D8AFA9B6138F406D001FE2A5 /* BircherMuesli-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D8AFA9A2138F406D001FE2A5 /* BircherMuesli */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8AFA9BC138F406D001FE2A5 /* Build configuration list for PBXNativeTarget "BircherMuesli" */;
+			buildPhases = (
+				D8AFA99E138F406D001FE2A5 /* Sources */,
+				D8AFA99F138F406D001FE2A5 /* Frameworks */,
+				D8AFA9A0138F406D001FE2A5 /* Resources */,
+				D8AFA9A1138F406D001FE2A5 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BircherMuesli;
+			productName = BircherMuesli;
+			productReference = D8AFA9A3138F406D001FE2A5 /* BircherMuesli.plugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D8AFA999138F406D001FE2A5 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = D8AFA99C138F406D001FE2A5 /* Build configuration list for PBXProject "BircherMuesli" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D8AFA997138F406D001FE2A5;
+			productRefGroup = D8AFA9A4138F406D001FE2A5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D8AFA9A2138F406D001FE2A5 /* BircherMuesli */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D8AFA9A0138F406D001FE2A5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8AFA9B5138F406D001FE2A5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D8AFA9A1138F406D001FE2A5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/BircherMuesli.plugin\"\ncp -rf \"$BUILT_PRODUCTS_DIR/BircherMuesli.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D8AFA99E138F406D001FE2A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8AFA9B9138F406D001FE2A5 /* BircherMuesliPlugin.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D8AFA9B3138F406D001FE2A5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D8AFA9B4138F406D001FE2A5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D8AFA9BA138F406D001FE2A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D8AFA9BB138F406D001FE2A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D8AFA9BD138F406D001FE2A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BircherMuesli/BircherMuesli-Prefix.pch";
+				INFOPLIST_FILE = "BircherMuesli/BircherMuesli-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Debug;
+		};
+		D8AFA9BE138F406D001FE2A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BircherMuesli/BircherMuesli-Prefix.pch";
+				INFOPLIST_FILE = "BircherMuesli/BircherMuesli-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Graphics/Quartz Composer Plug-Ins";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D8AFA99C138F406D001FE2A5 /* Build configuration list for PBXProject "BircherMuesli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8AFA9BA138F406D001FE2A5 /* Debug */,
+				D8AFA9BB138F406D001FE2A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8AFA9BC138F406D001FE2A5 /* Build configuration list for PBXNativeTarget "BircherMuesli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8AFA9BD138F406D001FE2A5 /* Debug */,
+				D8AFA9BE138F406D001FE2A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D8AFA999138F406D001FE2A5 /* Project object */;
+}
