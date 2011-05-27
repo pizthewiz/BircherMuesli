@@ -31,6 +31,20 @@
 		D8AFA9D6138F4DA3001FE2A5 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = SOURCE_ROOT; };
 		D8AFA9D7138F4E3B001FE2A5 /* BircherMuesli.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BircherMuesli.h; sourceTree = "<group>"; };
 		D8AFA9E713906264001FE2A5 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		D8AFA9EA13906847001FE2A5 /* AMSDKCompatibility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMSDKCompatibility.h; sourceTree = "<group>"; };
+		D8AFA9EB13906847001FE2A5 /* AMSerialErrors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMSerialErrors.h; sourceTree = "<group>"; };
+		D8AFA9EC13906847001FE2A5 /* AMSerialPort.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMSerialPort.h; sourceTree = "<group>"; };
+		D8AFA9ED13906847001FE2A5 /* AMSerialPort.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMSerialPort.m; sourceTree = "<group>"; };
+		D8AFA9EE13906847001FE2A5 /* AMSerialPort_Deprecated.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMSerialPort_Deprecated.h; sourceTree = "<group>"; };
+		D8AFA9EF13906847001FE2A5 /* AMSerialPort_Deprecated.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMSerialPort_Deprecated.m; sourceTree = "<group>"; };
+		D8AFA9F013906847001FE2A5 /* AMSerialPortAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMSerialPortAdditions.h; sourceTree = "<group>"; };
+		D8AFA9F113906847001FE2A5 /* AMSerialPortAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMSerialPortAdditions.m; sourceTree = "<group>"; };
+		D8AFA9F213906847001FE2A5 /* AMSerialPortList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMSerialPortList.h; sourceTree = "<group>"; };
+		D8AFA9F313906847001FE2A5 /* AMSerialPortList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMSerialPortList.m; sourceTree = "<group>"; };
+		D8AFA9F413906847001FE2A5 /* AMSerialPortList_Deprecated.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMSerialPortList_Deprecated.h; sourceTree = "<group>"; };
+		D8AFA9F513906847001FE2A5 /* AMSerialPortList_Deprecated.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMSerialPortList_Deprecated.m; sourceTree = "<group>"; };
+		D8AFA9F613906847001FE2A5 /* AMStandardEnumerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMStandardEnumerator.h; sourceTree = "<group>"; };
+		D8AFA9F713906847001FE2A5 /* AMStandardEnumerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMStandardEnumerator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				D8AFA9B0138F406D001FE2A5 /* BircherMuesli */,
+				D8AFA9E913906847001FE2A5 /* AMSerialPort */,
 				D8AFA9A5138F406D001FE2A5 /* Frameworks */,
 				D8AFA9A4138F406D001FE2A5 /* Products */,
 			);
@@ -106,6 +121,28 @@
 				D8AFA9E713906264001FE2A5 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D8AFA9E913906847001FE2A5 /* AMSerialPort */ = {
+			isa = PBXGroup;
+			children = (
+				D8AFA9EA13906847001FE2A5 /* AMSDKCompatibility.h */,
+				D8AFA9EB13906847001FE2A5 /* AMSerialErrors.h */,
+				D8AFA9EC13906847001FE2A5 /* AMSerialPort.h */,
+				D8AFA9ED13906847001FE2A5 /* AMSerialPort.m */,
+				D8AFA9EE13906847001FE2A5 /* AMSerialPort_Deprecated.h */,
+				D8AFA9EF13906847001FE2A5 /* AMSerialPort_Deprecated.m */,
+				D8AFA9F013906847001FE2A5 /* AMSerialPortAdditions.h */,
+				D8AFA9F113906847001FE2A5 /* AMSerialPortAdditions.m */,
+				D8AFA9F213906847001FE2A5 /* AMSerialPortList.h */,
+				D8AFA9F313906847001FE2A5 /* AMSerialPortList.m */,
+				D8AFA9F413906847001FE2A5 /* AMSerialPortList_Deprecated.h */,
+				D8AFA9F513906847001FE2A5 /* AMSerialPortList_Deprecated.m */,
+				D8AFA9F613906847001FE2A5 /* AMStandardEnumerator.h */,
+				D8AFA9F713906847001FE2A5 /* AMStandardEnumerator.m */,
+			);
+			name = AMSerialPort;
+			path = vendor/AMSerialPort/SharedCode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
