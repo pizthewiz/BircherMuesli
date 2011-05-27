@@ -6,5 +6,5 @@
   Copyright 2011 Chorded Constructions. All rights reserved.
 */
 
-"kQCPlugIn_Name" = "Serial Something";
-"kQCPlugIn_Description" = "It does something";
+"kQCPlugIn_Name" = "Serial Device";
+"kQCPlugIn_Description" = "List available serial devices";

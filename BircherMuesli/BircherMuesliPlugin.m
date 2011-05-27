@@ -9,9 +9,6 @@
 #import "BircherMuesliPlugIn.h"
 #import "BircherMuesli.h"
 
-#define	kQCPlugIn_Name				@"BircherMuesli"
-#define	kQCPlugIn_Description		@"BircherMuesli description"
-
 @implementation BircherMuesliPlugIn
 
 + (NSDictionary*)attributes{
