@@ -16,7 +16,7 @@
 
 @implementation BMDeviceReaderPlugIn
 
-@dynamic inputDevicePath, inputDeviceBaudRate;
+@dynamic inputDevicePath, inputDeviceBaudRate, outputData;
 @synthesize serialPort = _serialPort;
 
 + (NSDictionary*)attributes {
@@ -35,6 +35,8 @@
                     [NSNumber numberWithUnsignedInteger:0], QCPortAttributeMinimumValueKey,
                     [NSNumber numberWithUnsignedInteger:115200], QCPortAttributeMaximumValueKey, 
                     [NSNumber numberWithUnsignedInteger:9600], QCPortAttributeDefaultValueKey, nil];
+    else if ([key isEqualToString:@"outputData"])
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"Data", QCPortAttributeNameKey, nil];
 	return nil;
 }
 
@@ -95,7 +97,7 @@
     if ([self.inputDevicePath isEqualToString:@""])
         return YES;
 
-    if (!([self didValueForInputKeyChange:@"inputDevicePath"] && _serialPort))
+    if (!([self didValueForInputKeyChange:@"inputDevicePath"] && [self didValueForInputKeyChange:@"inputDeviceBaudRate"] && _serialPort))
         return YES;
 
     CCDebugLogSelector();
