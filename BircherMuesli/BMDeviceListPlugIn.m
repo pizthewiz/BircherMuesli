@@ -24,8 +24,8 @@
 
 + (NSDictionary*)attributes {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-        CCLocalizedString(@"kQCPlugIn_Name", NULL), QCPlugInAttributeNameKey, 
-        CCLocalizedString(@"kQCPlugIn_Description", NULL), QCPlugInAttributeDescriptionKey, 
+        CCLocalizedString(@"DeviceListPlugInName", NULL), QCPlugInAttributeNameKey, 
+        CCLocalizedString(@"DeviceListPlugInDescription", NULL), QCPlugInAttributeDescriptionKey, 
         // TODO - add QCPlugInAttributeCategoriesKey and QCPlugInAttributeExamplesKey
         nil];
 }
