@@ -8,8 +8,11 @@
 
 #import "BMDeviceReaderPlugIn.h"
 #import "BircherMuesli.h"
+#import "AMSerialPort.h"
 
 @implementation BMDeviceReaderPlugIn
+
+@dynamic inputDevicePath;
 
 + (NSDictionary*)attributes {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -20,6 +23,8 @@
 }
 
 + (NSDictionary*)attributesForPropertyPortWithKey:(NSString*)key {
+    if ([key isEqualToString:@"inputDevicePath"])
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"Device", QCPortAttributeNameKey, nil];
 	return nil;
 }
 
@@ -72,7 +77,16 @@
      Return NO in case of failure during the execution (this will prevent rendering of the current frame to complete).
      */
 
-	return YES;
+    // bail on empty device path
+    if ([self.inputDevicePath isEqualToString:@""])
+        return YES;
+
+    if (!([self didValueForInputKeyChange:@"inputDevicePath"] && _serialPort))
+        return YES;
+
+    CCDebugLogSelector();
+
+    return YES;
 }
 
 - (void)disableExecution:(id <QCPlugInContext>)context {

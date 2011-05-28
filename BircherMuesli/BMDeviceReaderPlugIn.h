@@ -8,5 +8,11 @@
 
 #import <Quartz/Quartz.h>
 
-@interface BMDeviceReaderPlugIn : QCPlugIn {}
+@class AMSerialPort;
+
+@interface BMDeviceReaderPlugIn : QCPlugIn {
+@private
+    AMSerialPort* _serialPort;
+}
+@property (nonatomic, assign) NSString* inputDevicePath;
 @end
