@@ -10,9 +10,17 @@
 #import "BircherMuesli.h"
 #import "AMSerialPortList.h"
 
+@interface BircherMuesliPlugIn()
+- (void)_setupPortListening;
+- (void)_didAddSerialPorts:(NSNotification*)notification;
+- (void)_didRemoveSerialPorts:(NSNotification*)notification;
+@end
+
 @implementation BircherMuesliPlugIn
 
-+ (NSDictionary*)attributes{
+@dynamic outputDeviceList;
+
++ (NSDictionary*)attributes {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
         CCLocalizedString(@"kQCPlugIn_Name", NULL), QCPlugInAttributeNameKey, 
         CCLocalizedString(@"kQCPlugIn_Description", NULL), QCPlugInAttributeDescriptionKey, 
@@ -21,15 +29,17 @@
 }
 
 + (NSDictionary*)attributesForPropertyPortWithKey:(NSString*)key {
+    if ([key isEqualToString:@"outputDeviceList"])
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"Device List", QCPortAttributeNameKey, nil];
 	return nil;
 }
 
 + (QCPlugInExecutionMode)executionMode{
-	return kQCPlugInExecutionModeProcessor;
+	return kQCPlugInExecutionModeProvider;
 }
 
 + (QCPlugInTimeMode)timeMode {
-	return kQCPlugInTimeModeNone;
+	return kQCPlugInTimeModeIdle;
 }
 
 #pragma mark -
@@ -37,18 +47,24 @@
 - (id)init {
 	self = [super init];
 	if (self) {
+        _deviceList = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
 
 - (void)finalize {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_deviceList release];
+
 	[super finalize];
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_deviceList release];
+
 	[super dealloc];
 }
-
 
 #pragma mark - EXECUTION
 
@@ -58,10 +74,7 @@
 	Return NO in case of fatal failure (this will prevent rendering of the composition to start).
 	*/
 
-    NSArray* serialPorts = [[AMSerialPortList sharedPortList] serialPorts];
-    for (AMSerialPort* serialPort in serialPorts) {
-        CCDebugLog(@"PORT:%@", serialPort);
-    }
+    [self _setupPortListening];
 
 	return YES;
 }
@@ -95,6 +108,27 @@
 	/*
 	Called by Quartz Composer when rendering of the composition stops: perform any required cleanup for the plug-in.
 	*/
+}
+
+#pragma mark - PRIVATE
+
+- (void)_setupPortListening {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didAddSerialPorts:) name:AMSerialPortListDidAddPortsNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didRemoveSerialPorts:) name:AMSerialPortListDidRemovePortsNotification object:nil];
+
+    // list ports
+    NSArray* serialPorts = [[AMSerialPortList sharedPortList] serialPorts];
+    for (AMSerialPort* serialPort in serialPorts) {
+        CCDebugLog(@"PORT: %@", serialPort);
+    }
+}
+
+- (void)_didAddSerialPorts:(NSNotification*)notification {
+    CCDebugLogSelector();
+}
+
+- (void)_didRemoveSerialPorts:(NSNotification*)notification {
+    CCDebugLogSelector();    
 }
 
 @end

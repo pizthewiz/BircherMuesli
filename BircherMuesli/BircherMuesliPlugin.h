@@ -8,5 +8,9 @@
 
 #import <Quartz/Quartz.h>
 
-@interface BircherMuesliPlugIn : QCPlugIn {}
+@interface BircherMuesliPlugIn : QCPlugIn {
+@private
+    NSMutableArray* _deviceList;
+}
+@property (nonatomic, assign) NSArray* outputDeviceList;
 @end
