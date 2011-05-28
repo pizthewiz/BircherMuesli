@@ -15,4 +15,5 @@
     AMSerialPort* _serialPort;
 }
 @property (nonatomic, assign) NSString* inputDevicePath;
+@property (nonatomic) NSUInteger inputDeviceBaudRate;
 @end

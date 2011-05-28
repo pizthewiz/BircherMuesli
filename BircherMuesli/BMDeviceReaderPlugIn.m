@@ -10,9 +10,14 @@
 #import "BircherMuesli.h"
 #import "AMSerialPort.h"
 
+@interface BMDeviceReaderPlugIn()
+@property (nonatomic, retain) AMSerialPort* serialPort;
+@end
+
 @implementation BMDeviceReaderPlugIn
 
-@dynamic inputDevicePath;
+@dynamic inputDevicePath, inputDeviceBaudRate;
+@synthesize serialPort = _serialPort;
 
 + (NSDictionary*)attributes {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -25,6 +30,11 @@
 + (NSDictionary*)attributesForPropertyPortWithKey:(NSString*)key {
     if ([key isEqualToString:@"inputDevicePath"])
         return [NSDictionary dictionaryWithObjectsAndKeys:@"Device", QCPortAttributeNameKey, nil];
+    else if ([key isEqualToString:@"inputDeviceBaudRate"])
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"Baud Rate", QCPortAttributeNameKey, 
+                    [NSNumber numberWithUnsignedInteger:0], QCPortAttributeMinimumValueKey,
+                    [NSNumber numberWithUnsignedInteger:115200], QCPortAttributeMaximumValueKey, 
+                    [NSNumber numberWithUnsignedInteger:9600], QCPortAttributeDefaultValueKey, nil];
 	return nil;
 }
 
@@ -46,10 +56,14 @@
 }
 
 - (void)finalize {
+    [_serialPort release];
+
 	[super finalize];
 }
 
 - (void)dealloc {
+    [_serialPort release];
+
 	[super dealloc];
 }
 
