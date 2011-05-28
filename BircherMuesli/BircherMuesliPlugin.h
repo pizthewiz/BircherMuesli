@@ -11,6 +11,7 @@
 @interface BircherMuesliPlugIn : QCPlugIn {
 @private
     NSMutableArray* _deviceList;
+    BOOL _deviceListChanged;
 }
 @property (nonatomic, assign) NSArray* outputDeviceList;
 @end

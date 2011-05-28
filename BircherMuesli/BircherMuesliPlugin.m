@@ -9,9 +9,11 @@
 #import "BircherMuesliPlugIn.h"
 #import "BircherMuesli.h"
 #import "AMSerialPortList.h"
+#import "AMSerialPort.h"
 
 @interface BircherMuesliPlugIn()
 - (void)_setupPortListening;
+- (void)_tearDownPortListening;
 - (void)_didAddSerialPorts:(NSNotification*)notification;
 - (void)_didRemoveSerialPorts:(NSNotification*)notification;
 @end
@@ -47,21 +49,18 @@
 - (id)init {
 	self = [super init];
 	if (self) {
-        _deviceList = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
 
 - (void)finalize {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_deviceList release];
+    [self _tearDownPortListening];
 
 	[super finalize];
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_deviceList release];
+    [self _tearDownPortListening];
 
 	[super dealloc];
 }
@@ -74,6 +73,7 @@
 	Return NO in case of fatal failure (this will prevent rendering of the composition to start).
 	*/
 
+    // NB - might not be necessary to tear it down entirely
     [self _setupPortListening];
 
 	return YES;
@@ -90,11 +90,14 @@
 	Called by Quartz Composer whenever the plug-in instance needs to execute.
 	Only read from the plug-in inputs and produce a result (by writing to the plug-in outputs or rendering to the destination OpenGL context) within that method and nowhere else.
 	Return NO in case of failure during the execution (this will prevent rendering of the current frame to complete).
-	
-	The OpenGL context for rendering can be accessed and defined for CGL macros using:
-	CGLContextObj cgl_ctx = [context CGLContextObj];
 	*/
-	
+
+    if (!_deviceListChanged)
+        return YES;
+
+    self.outputDeviceList = _deviceList;
+    _deviceListChanged = NO;
+
 	return YES;
 }
 
@@ -107,7 +110,7 @@
 - (void)stopExecution:(id <QCPlugInContext>)context {
 	/*
 	Called by Quartz Composer when rendering of the composition stops: perform any required cleanup for the plug-in.
-	*/
+	*/    
 }
 
 #pragma mark - PRIVATE
@@ -116,19 +119,50 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didAddSerialPorts:) name:AMSerialPortListDidAddPortsNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didRemoveSerialPorts:) name:AMSerialPortListDidRemovePortsNotification object:nil];
 
+    _deviceList = [[NSMutableArray alloc] init];
+
     // list ports
     NSArray* serialPorts = [[AMSerialPortList sharedPortList] serialPorts];
     for (AMSerialPort* serialPort in serialPorts) {
         CCDebugLog(@"PORT: %@", serialPort);
+        [_deviceList addObject:[serialPort bsdPath]];
     }
+
+    _deviceListChanged = [_deviceList count] != 0;
+}
+
+- (void)_tearDownPortListening {
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:AMSerialPortListDidAddPortsNotification object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:AMSerialPortListDidRemovePortsNotification object:nil];
+
+    [_deviceList release];
+    _deviceList = nil;
 }
 
 - (void)_didAddSerialPorts:(NSNotification*)notification {
     CCDebugLogSelector();
+
+    NSArray* addedPorts = [[notification userInfo] objectForKey:AMSerialPortListAddedPorts];
+    for (AMSerialPort* serialPort in addedPorts) {
+        CCDebugLog(@"ADDING PORT: %@", serialPort);
+        [_deviceList addObject:[serialPort bsdPath]];
+    }
+
+    _deviceListChanged = YES;
 }
 
 - (void)_didRemoveSerialPorts:(NSNotification*)notification {
-    CCDebugLogSelector();    
+    CCDebugLogSelector();
+
+    NSArray* removedPorts = [[notification userInfo] objectForKey:AMSerialPortListRemovedPorts];
+    for (AMSerialPort* serialPort in removedPorts) {
+        CCDebugLog(@"REMOVING PORT: %@", serialPort);
+        if (![_deviceList indexOfObject:[serialPort bsdPath]])
+            NSLog(@"WARNING - attempting to remove port not in device list");
+        [_deviceList removeObject:[serialPort bsdPath]];
+    }
+
+    _deviceListChanged = YES;
 }
 
 @end
