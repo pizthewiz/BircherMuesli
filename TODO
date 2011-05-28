@@ -1,5 +1,19 @@
 
+DEVICE LIST
 NOW
 [X] vendor AMSerialPort
+[ ] offer simple filter in inspector
 
+LATER
+[ ] struct of structs {bsdPath, name, type, isAvailable}
+
+
+-------------------------------------------------
+DEVICE READ
+NOW
+LATER
+
+-------------------------------------------------
+DEVICE WRITE
+NOW
 LATER
