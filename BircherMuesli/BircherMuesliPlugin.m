@@ -73,7 +73,6 @@
 	Return NO in case of fatal failure (this will prevent rendering of the composition to start).
 	*/
 
-    // NB - might not be necessary to tear it down entirely
     [self _setupPortListening];
 
 	return YES;
@@ -110,7 +109,9 @@
 - (void)stopExecution:(id <QCPlugInContext>)context {
 	/*
 	Called by Quartz Composer when rendering of the composition stops: perform any required cleanup for the plug-in.
-	*/    
+	*/
+
+    [self _tearDownPortListening];
 }
 
 #pragma mark - PRIVATE
