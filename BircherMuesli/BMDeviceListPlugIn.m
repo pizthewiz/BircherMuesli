@@ -1,24 +1,24 @@
 //
-//  BircherMuesliPlugIn.m
+//  BMDeviceListPlugIn.m
 //  BircherMuesli
 //
 //  Created by Jean-Pierre Mouilleseaux on 26 May 2011.
 //  Copyright 2011 Chorded Constructions. All rights reserved.
 //
 
-#import "BircherMuesliPlugIn.h"
+#import "BMDeviceListPlugIn.h"
 #import "BircherMuesli.h"
 #import "AMSerialPortList.h"
 #import "AMSerialPort.h"
 
-@interface BircherMuesliPlugIn()
+@interface BMDeviceListPlugIn()
 - (void)_setupPortListening;
 - (void)_tearDownPortListening;
 - (void)_didAddSerialPorts:(NSNotification*)notification;
 - (void)_didRemoveSerialPorts:(NSNotification*)notification;
 @end
 
-@implementation BircherMuesliPlugIn
+@implementation BMDeviceListPlugIn
 
 @dynamic outputDeviceList;
 

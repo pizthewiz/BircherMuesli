@@ -10,7 +10,7 @@
 		D8AFA9A7138F406D001FE2A5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFA9A6138F406D001FE2A5 /* Cocoa.framework */; };
 		D8AFA9A9138F406D001FE2A5 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFA9A8138F406D001FE2A5 /* Quartz.framework */; };
 		D8AFA9B5138F406D001FE2A5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8AFA9B3138F406D001FE2A5 /* InfoPlist.strings */; };
-		D8AFA9B9138F406D001FE2A5 /* BircherMuesliPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9B8138F406D001FE2A5 /* BircherMuesliPlugin.m */; };
+		D8AFA9B9138F406D001FE2A5 /* BMDeviceListPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9B8138F406D001FE2A5 /* BMDeviceListPlugIn.m */; };
 		D8AFA9E813906264001FE2A5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8AFA9E713906264001FE2A5 /* Localizable.strings */; };
 		D8AFAA0C139069F1001FE2A5 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFAA011390697B001FE2A5 /* IOKit.framework */; };
 		D8AFAA0D13906A06001FE2A5 /* AMSerialPortList.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9F313906847001FE2A5 /* AMSerialPortList.m */; };
@@ -28,8 +28,8 @@
 		D8AFA9B2138F406D001FE2A5 /* BircherMuesli-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BircherMuesli-Info.plist"; sourceTree = "<group>"; };
 		D8AFA9B4138F406D001FE2A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D8AFA9B6138F406D001FE2A5 /* BircherMuesli-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BircherMuesli-Prefix.pch"; sourceTree = "<group>"; };
-		D8AFA9B7138F406D001FE2A5 /* BircherMuesliPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BircherMuesliPlugin.h; sourceTree = "<group>"; };
-		D8AFA9B8138F406D001FE2A5 /* BircherMuesliPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BircherMuesliPlugin.m; sourceTree = "<group>"; };
+		D8AFA9B7138F406D001FE2A5 /* BMDeviceListPlugIn.h */ = {isa = PBXFileReference; path = BMDeviceListPlugIn.h; sourceTree = "<group>"; };
+		D8AFA9B8138F406D001FE2A5 /* BMDeviceListPlugIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMDeviceListPlugIn.m; sourceTree = "<group>"; };
 		D8AFA9D2138F4D9A001FE2A5 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = SOURCE_ROOT; };
 		D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = SOURCE_ROOT; };
 		D8AFA9D5138F4DA3001FE2A5 /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = SOURCE_ROOT; };
@@ -109,8 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				D8AFA9D7138F4E3B001FE2A5 /* BircherMuesli.h */,
-				D8AFA9B7138F406D001FE2A5 /* BircherMuesliPlugin.h */,
-				D8AFA9B8138F406D001FE2A5 /* BircherMuesliPlugin.m */,
+				D8AFA9B7138F406D001FE2A5 /* BMDeviceListPlugIn.h */,
+				D8AFA9B8138F406D001FE2A5 /* BMDeviceListPlugIn.m */,
 				D8AFA9B1138F406D001FE2A5 /* Supporting Files */,
 				D8AFA9D2138F4D9A001FE2A5 /* README.markdown */,
 				D8AFA9D5138F4DA3001FE2A5 /* Rakefile */,
@@ -246,7 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8AFA9B9138F406D001FE2A5 /* BircherMuesliPlugin.m in Sources */,
+				D8AFA9B9138F406D001FE2A5 /* BMDeviceListPlugIn.m in Sources */,
 				D8AFAA0E13906A1C001FE2A5 /* AMSerialPort.m in Sources */,
 				D8AFAA0F13906A20001FE2A5 /* AMStandardEnumerator.m in Sources */,
 				D8AFAA0D13906A06001FE2A5 /* AMSerialPortList.m in Sources */,

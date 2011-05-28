@@ -1,5 +1,5 @@
 //
-//  BircherMuesliPlugin.h
+//  BMDeviceListPlugIn.h
 //  BircherMuesli
 //
 //  Created by Jean-Pierre Mouilleseaux on 26 May 2011.
@@ -8,7 +8,7 @@
 
 #import <Quartz/Quartz.h>
 
-@interface BircherMuesliPlugIn : QCPlugIn {
+@interface BMDeviceListPlugIn : QCPlugIn {
 @private
     NSMutableArray* _deviceList;
     BOOL _deviceListChanged;
