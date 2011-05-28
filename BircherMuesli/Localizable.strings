@@ -8,3 +8,9 @@
 
 "DeviceListPlugInName" = "Serial Device";
 "DeviceListPlugInDescription" = "List available serial devices";
+
+"DeviceReaderPlugInName" = "Serial Reader";
+"DeviceReaderPlugInDescription" = "Read from a given serial device";
+
+"DeviceWriterPlugInName" = "Serial Writer";
+"DeviceWriterPlugInDescription" = "Write to a given serial device";

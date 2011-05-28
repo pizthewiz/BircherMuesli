@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D8A4E56C1390A4CA006AD752 /* BMDeviceReaderPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A4E56B1390A4CA006AD752 /* BMDeviceReaderPlugIn.m */; };
 		D8AFA9A7138F406D001FE2A5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFA9A6138F406D001FE2A5 /* Cocoa.framework */; };
 		D8AFA9A9138F406D001FE2A5 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFA9A8138F406D001FE2A5 /* Quartz.framework */; };
 		D8AFA9B5138F406D001FE2A5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8AFA9B3138F406D001FE2A5 /* InfoPlist.strings */; };
@@ -20,6 +21,8 @@
 
 /* Begin PBXFileReference section */
 		D8A4E5681390736D006AD752 /* Device Explorer.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = "Device Explorer.qtz"; sourceTree = SOURCE_ROOT; };
+		D8A4E56A1390A4CA006AD752 /* BMDeviceReaderPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMDeviceReaderPlugIn.h; sourceTree = "<group>"; };
+		D8A4E56B1390A4CA006AD752 /* BMDeviceReaderPlugIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMDeviceReaderPlugIn.m; sourceTree = "<group>"; };
 		D8AFA9A3138F406D001FE2A5 /* BircherMuesli.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BircherMuesli.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8AFA9A6138F406D001FE2A5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D8AFA9A8138F406D001FE2A5 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
@@ -28,7 +31,7 @@
 		D8AFA9B2138F406D001FE2A5 /* BircherMuesli-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BircherMuesli-Info.plist"; sourceTree = "<group>"; };
 		D8AFA9B4138F406D001FE2A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D8AFA9B6138F406D001FE2A5 /* BircherMuesli-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BircherMuesli-Prefix.pch"; sourceTree = "<group>"; };
-		D8AFA9B7138F406D001FE2A5 /* BMDeviceListPlugIn.h */ = {isa = PBXFileReference; path = BMDeviceListPlugIn.h; sourceTree = "<group>"; };
+		D8AFA9B7138F406D001FE2A5 /* BMDeviceListPlugIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMDeviceListPlugIn.h; sourceTree = "<group>"; };
 		D8AFA9B8138F406D001FE2A5 /* BMDeviceListPlugIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMDeviceListPlugIn.m; sourceTree = "<group>"; };
 		D8AFA9D2138F4D9A001FE2A5 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = SOURCE_ROOT; };
 		D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = SOURCE_ROOT; };
@@ -111,6 +114,8 @@
 				D8AFA9D7138F4E3B001FE2A5 /* BircherMuesli.h */,
 				D8AFA9B7138F406D001FE2A5 /* BMDeviceListPlugIn.h */,
 				D8AFA9B8138F406D001FE2A5 /* BMDeviceListPlugIn.m */,
+				D8A4E56A1390A4CA006AD752 /* BMDeviceReaderPlugIn.h */,
+				D8A4E56B1390A4CA006AD752 /* BMDeviceReaderPlugIn.m */,
 				D8AFA9B1138F406D001FE2A5 /* Supporting Files */,
 				D8AFA9D2138F4D9A001FE2A5 /* README.markdown */,
 				D8AFA9D5138F4DA3001FE2A5 /* Rakefile */,
@@ -250,6 +255,7 @@
 				D8AFAA0E13906A1C001FE2A5 /* AMSerialPort.m in Sources */,
 				D8AFAA0F13906A20001FE2A5 /* AMStandardEnumerator.m in Sources */,
 				D8AFAA0D13906A06001FE2A5 /* AMSerialPortList.m in Sources */,
+				D8A4E56C1390A4CA006AD752 /* BMDeviceReaderPlugIn.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
