@@ -7,7 +7,7 @@ BUNDLE_VERSION_NUMBER_KEY = 'CFBundleVersion'
 BUNDLE_VERSION_STRING_KEY = 'CFBundleShortVersionString'
 HEAD_REVISION_KEY = 'com.chordedconstructions.ProjectHEADRevision'
 
-ARCHIVE_FILES = %w(README.markdown TODO CHANGELOG)
+ARCHIVE_FILES = %w(README.markdown TODO CHANGELOG Device\ Explorer.qtz)
 ARCHIVE_NAME = 'BircherMuesli'
 
 # helpers

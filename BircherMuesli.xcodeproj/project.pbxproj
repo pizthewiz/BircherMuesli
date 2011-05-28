@@ -19,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D8A4E5681390736D006AD752 /* Device Explorer.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = "Device Explorer.qtz"; sourceTree = SOURCE_ROOT; };
 		D8AFA9A3138F406D001FE2A5 /* BircherMuesli.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BircherMuesli.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8AFA9A6138F406D001FE2A5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D8AFA9A8138F406D001FE2A5 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
@@ -115,6 +116,7 @@
 				D8AFA9D5138F4DA3001FE2A5 /* Rakefile */,
 				D8AFA9D6138F4DA3001FE2A5 /* TODO */,
 				D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG */,
+				D8A4E5681390736D006AD752 /* Device Explorer.qtz */,
 			);
 			path = BircherMuesli;
 			sourceTree = "<group>";
