@@ -7,3 +7,4 @@ THANKS
 - Anton Marini (vade) for pointing me to AMSerialPort
 
 NOTES
+- the Serial Devices subpatch vends callout (/dev/cu.*) devices, not the callin (/dev/tty.*) half
