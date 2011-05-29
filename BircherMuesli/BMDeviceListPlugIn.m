@@ -159,7 +159,7 @@
     for (AMSerialPort* serialPort in removedPorts) {
         CCDebugLog(@"REMOVING PORT: %@", serialPort);
         if (![_deviceList indexOfObject:[serialPort bsdPath]])
-            NSLog(@"WARNING - attempting to remove port not in device list");
+            CCErrorLog(@"WARNING - attempting to remove port not in device list");
         [_deviceList removeObject:[serialPort bsdPath]];
     }
 
