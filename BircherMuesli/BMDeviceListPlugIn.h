@@ -14,4 +14,5 @@
     BOOL _deviceListChanged;
 }
 @property (nonatomic, assign) NSArray* outputDeviceList;
+@property (nonatomic) BOOL outputListUpdated;
 @end

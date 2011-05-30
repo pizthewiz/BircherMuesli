@@ -2,6 +2,7 @@
 DEVICE LIST
 NOW
 [X] vendor AMSerialPort
+[X] expose List Updated output
 [ ] offer simple filter in inspector
 
 LATER

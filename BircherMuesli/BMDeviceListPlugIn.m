@@ -20,7 +20,7 @@
 
 @implementation BMDeviceListPlugIn
 
-@dynamic outputDeviceList;
+@dynamic outputDeviceList, outputListUpdated;
 
 + (NSDictionary*)attributes {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -33,6 +33,8 @@
 + (NSDictionary*)attributesForPropertyPortWithKey:(NSString*)key {
     if ([key isEqualToString:@"outputDeviceList"])
         return [NSDictionary dictionaryWithObjectsAndKeys:@"Device List", QCPortAttributeNameKey, nil];
+    else if ([key isEqualToString:@"outputListUpdated"])
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"List Updated", QCPortAttributeNameKey, nil];
 	return nil;
 }
 
@@ -95,6 +97,7 @@
         return YES;
 
     self.outputDeviceList = _deviceList;
+    self.outputListUpdated = _deviceListChanged;
     _deviceListChanged = NO;
 
 	return YES;
