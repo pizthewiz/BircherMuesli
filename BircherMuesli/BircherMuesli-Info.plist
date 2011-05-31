@@ -24,6 +24,7 @@
 	<array>
 		<string>BMDeviceListPlugIn</string>
 		<string>BMDeviceReaderPlugIn</string>
+		<string>BMDeviceWriterPlugIn</string>
 	</array>
 </dict>
 </plist>

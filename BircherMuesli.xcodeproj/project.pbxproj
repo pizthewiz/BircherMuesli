@@ -17,6 +17,7 @@
 		D8AFAA0C139069F1001FE2A5 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFAA011390697B001FE2A5 /* IOKit.framework */; };
 		D8AFAA0D13906A06001FE2A5 /* AMSerialPortList.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9F313906847001FE2A5 /* AMSerialPortList.m */; };
 		D8AFAA0E13906A1C001FE2A5 /* AMSerialPort.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9ED13906847001FE2A5 /* AMSerialPort.m */; };
+		D8C4E5E31394C97F00D9565E /* BMDeviceWriterPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C4E5E21394C97F00D9565E /* BMDeviceWriterPlugIn.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		D8AFA9F213906847001FE2A5 /* AMSerialPortList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMSerialPortList.h; sourceTree = "<group>"; };
 		D8AFA9F313906847001FE2A5 /* AMSerialPortList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMSerialPortList.m; sourceTree = "<group>"; };
 		D8AFAA011390697B001FE2A5 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		D8C4E5E11394C97F00D9565E /* BMDeviceWriterPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMDeviceWriterPlugIn.h; sourceTree = "<group>"; };
+		D8C4E5E21394C97F00D9565E /* BMDeviceWriterPlugIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMDeviceWriterPlugIn.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,8 @@
 				D8AFA9B8138F406D001FE2A5 /* BMDeviceListPlugIn.m */,
 				D8A4E56A1390A4CA006AD752 /* BMDeviceReaderPlugIn.h */,
 				D8A4E56B1390A4CA006AD752 /* BMDeviceReaderPlugIn.m */,
+				D8C4E5E11394C97F00D9565E /* BMDeviceWriterPlugIn.h */,
+				D8C4E5E21394C97F00D9565E /* BMDeviceWriterPlugIn.m */,
 				D8AFA9B1138F406D001FE2A5 /* Supporting Files */,
 				D8AFA9D2138F4D9A001FE2A5 /* README.markdown */,
 				D8AFA9D5138F4DA3001FE2A5 /* Rakefile */,
@@ -242,6 +247,7 @@
 				D8AFAA0E13906A1C001FE2A5 /* AMSerialPort.m in Sources */,
 				D80CAA6E1394887F00F6F861 /* AMSerialPortAdditions.m in Sources */,
 				D8AFAA0D13906A06001FE2A5 /* AMSerialPortList.m in Sources */,
+				D8C4E5E31394C97F00D9565E /* BMDeviceWriterPlugIn.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
