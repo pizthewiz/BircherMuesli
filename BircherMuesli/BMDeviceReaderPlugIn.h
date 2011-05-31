@@ -12,6 +12,8 @@
 @interface BMDeviceReaderPlugIn : QCPlugIn <AMSerialPortDelegate> {
 @private
     AMSerialPort* _serialPort;
+    NSString* _devicePath;
+    NSUInteger _deviceBaudRate;
     NSString* _data;
     BOOL _dataChanged;
 }

@@ -13,6 +13,7 @@
 #import "AMSerialPortList.h"
 
 @interface BMDeviceReaderPlugIn()
+@property (nonatomic, retain) NSString* devicePath;
 - (void)_setupSerialDeviceWithPath:(NSString*)path atBaudRate:(NSUInteger)baudRate;
 - (void)_tearDownSerialDevice;
 @end
@@ -20,6 +21,7 @@
 @implementation BMDeviceReaderPlugIn
 
 @dynamic inputDevicePath, inputDeviceBaudRate, outputData;
+@synthesize devicePath = _devicePath;
 
 + (NSDictionary*)attributes {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -61,12 +63,14 @@
 
 - (void)finalize {
     [self _tearDownSerialDevice];
+    [_devicePath release];
 
 	[super finalize];
 }
 
 - (void)dealloc {
     [self _tearDownSerialDevice];
+    [_devicePath release];
 
 	[super dealloc];
 }
@@ -80,6 +84,8 @@
      */
 
     CCDebugLogSelector();
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didAddSerialPorts:) name:AMSerialPortListDidAddPortsNotification object:nil];
 
 	return YES;
 }
@@ -113,6 +119,10 @@
         [self _setupSerialDeviceWithPath:self.inputDevicePath atBaudRate:self.inputDeviceBaudRate];
     }
 
+    // store for safe keeping, may be needed in replug situation
+    self.devicePath = self.inputDevicePath;
+    _deviceBaudRate = self.inputDeviceBaudRate;
+
     // TODO - return NO?
     if (!_serialPort) {
         return YES;
@@ -138,8 +148,9 @@
 
     CCDebugLogSelector();
 
-    // TODO - should tear down serial device
     [self _tearDownSerialDevice];
+
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:AMSerialPortListDidAddPortsNotification object:nil];
 }
 
 #pragma mark - SERIAL PORT DELEGATE
@@ -219,6 +230,18 @@
     _dataChanged = YES;
 }
 
+- (void)_didAddSerialPorts:(NSNotification*)notification {
+    CCDebugLogSelector();
+
+    NSArray* addedPorts = [[notification userInfo] objectForKey:AMSerialPortListAddedPorts];
+    for (AMSerialPort* serialPort in addedPorts) {
+        if (![[serialPort bsdPath] isEqualToString:self.devicePath])
+            continue;
+        [self _setupSerialDeviceWithPath:self.devicePath atBaudRate:_deviceBaudRate];
+        break;
+    }
+}
+
 - (void)_didRemoveSerialPorts:(NSNotification*)notification {
     CCDebugLogSelector();
 
@@ -227,6 +250,7 @@
         return;
 
     CCErrorLog(@"ERROR - serial device '%@' has been yanked!", [_serialPort name]);
+
     [self _tearDownSerialDevice];
 }
 
