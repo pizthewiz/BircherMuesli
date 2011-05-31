@@ -7,6 +7,14 @@
 //
 
 #import <Quartz/Quartz.h>
+#import "AMSerialPort.h"
 
-@interface BMDeviceWriterPlugIn : QCPlugIn {}
+@interface BMDeviceWriterPlugIn : QCPlugIn <AMSerialPortDelegate> {
+@private
+    AMSerialPort* _serialPort;
+    NSString* _devicePath;
+    NSUInteger _deviceBaudRate;
+}
+@property (nonatomic, assign) NSString* inputDevicePath;
+@property (nonatomic) NSUInteger inputDeviceBaudRate;
 @end

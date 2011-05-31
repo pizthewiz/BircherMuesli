@@ -8,8 +8,20 @@
 
 #import "BMDeviceWriterPlugIn.h"
 #import "BircherMuesli.h"
+#import "AMSerialPort.h"
+#import "AMSerialPortAdditions.h"
+#import "AMSerialPortList.h"
+
+@interface BMDeviceWriterPlugIn()
+@property (nonatomic, retain) NSString* devicePath;
+- (void)_setupSerialDeviceWithPath:(NSString*)path atBaudRate:(NSUInteger)baudRate;
+- (void)_tearDownSerialDevice;
+@end
 
 @implementation BMDeviceWriterPlugIn
+
+@dynamic inputDevicePath, inputDeviceBaudRate;
+@synthesize devicePath = _devicePath;
 
 + (NSDictionary*)attributes {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -20,11 +32,18 @@
 }
 
 + (NSDictionary*)attributesForPropertyPortWithKey:(NSString*)key {
+    if ([key isEqualToString:@"inputDevicePath"])
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"Device", QCPortAttributeNameKey, nil];
+    else if ([key isEqualToString:@"inputDeviceBaudRate"])
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"Baud Rate", QCPortAttributeNameKey, 
+                    [NSNumber numberWithUnsignedInteger:0], QCPortAttributeMinimumValueKey, 
+                    [NSNumber numberWithUnsignedInteger:115200], QCPortAttributeMaximumValueKey, 
+                    [NSNumber numberWithUnsignedInteger:9600], QCPortAttributeDefaultValueKey, nil];
 	return nil;
 }
 
 + (QCPlugInExecutionMode)executionMode{
-	return kQCPlugInExecutionModeProvider;
+	return kQCPlugInExecutionModeConsumer;
 }
 
 + (QCPlugInTimeMode)timeMode {
@@ -55,7 +74,9 @@
      Called by Quartz Composer when rendering of the composition starts: perform any required setup for the plug-in.
      Return NO in case of fatal failure (this will prevent rendering of the composition to start).
      */
-    
+
+    CCDebugLogSelector();
+
 	return YES;
 }
 
@@ -63,6 +84,8 @@
 	/*
      Called by Quartz Composer when the plug-in instance starts being used by Quartz Composer.
      */
+
+    CCDebugLogSelector();
 }
 
 - (BOOL)execute:(id <QCPlugInContext>)context atTime:(NSTimeInterval)time withArguments:(NSDictionary*)arguments {
@@ -79,12 +102,89 @@
 	/*
      Called by Quartz Composer when the plug-in instance stops being used by Quartz Composer.
      */
+
+    CCDebugLogSelector();
 }
 
 - (void)stopExecution:(id <QCPlugInContext>)context {
 	/*
      Called by Quartz Composer when rendering of the composition stops: perform any required cleanup for the plug-in.
      */    
+
+    CCDebugLogSelector();
+}
+
+#pragma mark - PRIVATE
+
+- (void)_setupSerialDeviceWithPath:(NSString*)path atBaudRate:(NSUInteger)baudRate {
+    CCDebugLogSelector();
+
+    [self _tearDownSerialDevice];
+
+    AMSerialPort* serialPort = [[AMSerialPortList sharedPortList] serialPortWithPath:path];
+    if (!serialPort) {
+        CCErrorLog(@"ERROR - failed to find serial port at path '%@' to attach to", path);
+        return;
+    }
+
+    if (![serialPort available]) {
+        CCErrorLog(@"ERROR - serial port '%@' is not available", serialPort);
+        return;
+    }
+
+    [serialPort setDelegate:self];
+
+    id fileHandle = [serialPort open];
+    if (!fileHandle) {
+        CCErrorLog(@"ERROR - failed to open serial port: %@", serialPort);
+        return;
+    }
+
+    // NB - strangely set spead after opening
+    [serialPort setSpeed:baudRate];
+    [serialPort clearError];
+    BOOL status = [serialPort commitChanges];
+    if (!status) {
+        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", baudRate, [serialPort errorCode], serialPort);
+    }
+
+    _serialPort = [serialPort retain];
+    [_serialPort readDataInBackground];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didRemoveSerialPorts:) name:AMSerialPortListDidRemovePortsNotification object:nil];
+}
+
+- (void)_tearDownSerialDevice {
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:AMSerialPortListDidRemovePortsNotification object:nil];
+
+    [_serialPort stopReadInBackground];
+    [_serialPort free];
+    [_serialPort release];
+    _serialPort = nil;
+}
+
+- (void)_didAddSerialPorts:(NSNotification*)notification {
+    CCDebugLogSelector();
+
+    NSArray* addedPorts = [[notification userInfo] objectForKey:AMSerialPortListAddedPorts];
+    for (AMSerialPort* serialPort in addedPorts) {
+        if (![[serialPort bsdPath] isEqualToString:self.devicePath])
+            continue;
+        [self _setupSerialDeviceWithPath:self.devicePath atBaudRate:_deviceBaudRate];
+        break;
+    }
+}
+
+- (void)_didRemoveSerialPorts:(NSNotification*)notification {
+    CCDebugLogSelector();
+
+    NSArray* removedPorts = [[notification userInfo] objectForKey:AMSerialPortListRemovedPorts];
+    if (![removedPorts containsObject:_serialPort])
+        return;
+
+    CCErrorLog(@"ERROR - serial device '%@' has been yanked!", [_serialPort name]);
+
+    [self _tearDownSerialDevice];
 }
 
 @end
