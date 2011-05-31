@@ -20,7 +20,7 @@
 
 @implementation BMDeviceWriterPlugIn
 
-@dynamic inputDevicePath, inputDeviceBaudRate;
+@dynamic inputDevicePath, inputDeviceBaudRate, inputData, inputSendSignal;
 @synthesize devicePath = _devicePath;
 
 + (NSDictionary*)attributes {
@@ -39,6 +39,10 @@
                     [NSNumber numberWithUnsignedInteger:0], QCPortAttributeMinimumValueKey, 
                     [NSNumber numberWithUnsignedInteger:115200], QCPortAttributeMaximumValueKey, 
                     [NSNumber numberWithUnsignedInteger:9600], QCPortAttributeDefaultValueKey, nil];
+    else if ([key isEqualToString:@"inputData"])
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"Data", QCPortAttributeNameKey, nil];
+    else if ([key isEqualToString:@"inputSendSignal"])
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"Send Data Signal", QCPortAttributeNameKey, nil];
 	return nil;
 }
 
@@ -149,7 +153,6 @@
     }
 
     _serialPort = [serialPort retain];
-    [_serialPort readDataInBackground];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didRemoveSerialPorts:) name:AMSerialPortListDidRemovePortsNotification object:nil];
 }
@@ -157,7 +160,6 @@
 - (void)_tearDownSerialDevice {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:AMSerialPortListDidRemovePortsNotification object:nil];
 
-    [_serialPort stopReadInBackground];
     [_serialPort free];
     [_serialPort release];
     _serialPort = nil;

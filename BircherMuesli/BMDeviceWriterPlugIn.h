@@ -17,4 +17,6 @@
 }
 @property (nonatomic, assign) NSString* inputDevicePath;
 @property (nonatomic) NSUInteger inputDeviceBaudRate;
+@property (nonatomic, assign) NSString* inputData;
+@property (nonatomic) BOOL inputSendSignal;
 @end
