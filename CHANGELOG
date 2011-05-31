@@ -1,3 +1,7 @@
 
+v0.2.0 (30 May 2011)
+* add Serial Reader patch
+* offer List Updated output from device list patch
+
 v0.1.0 (27 May 2011)
 * initial release, contains serial device list patch only
