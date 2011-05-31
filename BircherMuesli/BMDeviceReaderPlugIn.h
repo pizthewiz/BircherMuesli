@@ -12,6 +12,8 @@
 @interface BMDeviceReaderPlugIn : QCPlugIn <AMSerialPortDelegate> {
 @private
     AMSerialPort* _serialPort;
+    NSString* _data;
+    BOOL _dataChanged;
 }
 @property (nonatomic, assign) NSString* inputDevicePath;
 @property (nonatomic) NSUInteger inputDeviceBaudRate;

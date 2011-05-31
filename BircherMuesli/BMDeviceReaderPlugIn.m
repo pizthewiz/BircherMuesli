@@ -13,7 +13,6 @@
 #import "AMSerialPortList.h"
 
 @interface BMDeviceReaderPlugIn()
-@property (nonatomic, retain) AMSerialPort* serialPort;
 - (void)_setupSerialDeviceWithPath:(NSString*)path atBaudRate:(NSUInteger)baudRate;
 - (void)_tearDownSerialDevice;
 @end
@@ -21,7 +20,6 @@
 @implementation BMDeviceReaderPlugIn
 
 @dynamic inputDevicePath, inputDeviceBaudRate, outputData;
-@synthesize serialPort = _serialPort;
 
 + (NSDictionary*)attributes {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -36,7 +34,7 @@
         return [NSDictionary dictionaryWithObjectsAndKeys:@"Device", QCPortAttributeNameKey, nil];
     else if ([key isEqualToString:@"inputDeviceBaudRate"])
         return [NSDictionary dictionaryWithObjectsAndKeys:@"Baud Rate", QCPortAttributeNameKey, 
-                    [NSNumber numberWithUnsignedInteger:0], QCPortAttributeMinimumValueKey,
+                    [NSNumber numberWithUnsignedInteger:0], QCPortAttributeMinimumValueKey, 
                     [NSNumber numberWithUnsignedInteger:115200], QCPortAttributeMaximumValueKey, 
                     [NSNumber numberWithUnsignedInteger:9600], QCPortAttributeDefaultValueKey, nil];
     else if ([key isEqualToString:@"outputData"])
@@ -101,9 +99,10 @@
      Return NO in case of failure during the execution (this will prevent rendering of the current frame to complete).
      */
 
-//    if (dataChanged) {
-//        self.outputData = _outputData;
-//    }
+    if (_dataChanged) {
+        self.outputData = _data;
+        _dataChanged = NO;
+    }
 
     // bail on empty device path
     if ([self.inputDevicePath isEqualToString:@""])
@@ -145,8 +144,27 @@
 
 #pragma mark - SERIAL PORT DELEGATE
 
-- (void)serialPort:(AMSerialPort*) readData:(NSData*)data {
+- (void)serialPort:(AMSerialPort*)serialPort readData:(NSData*)data {
     CCDebugLogSelector();
+
+    if ([data length]) {
+        NSString* text = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        // NB - assuming newline as separator
+        NSString* trimmedText = [text stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+        [text release];
+        // NB - sometimes receive phantom data only containing newline
+        if ([trimmedText length]) {
+            CCDebugLog(@"READ: %@", trimmedText);
+            [_data release];
+            _data = [trimmedText retain];
+            _dataChanged = YES;
+        }
+        // continue listening
+        [serialPort readDataInBackground];
+    } else {
+        CCErrorLog(@"ERROR - port closed! %@", serialPort);
+        [self _tearDownSerialDevice];
+    }
 }
 
 #pragma mark - PRIVATE
@@ -182,15 +200,19 @@
         CCErrorLog(@"ERROR - failed to set speed %lu on port: %@", baudRate, serialPort);
     }
 
-    self.serialPort = serialPort;
-    [self.serialPort readDataInBackground];
+    _serialPort = [serialPort retain];
+    [_serialPort readDataInBackground];
 }
 
 - (void)_tearDownSerialDevice {
-//    [self.serialPort setDelegate:nil];
-    [self.serialPort stopReadInBackground];
-    [self.serialPort free];
-    self.serialPort = nil;
+    [_serialPort stopReadInBackground];
+    [_serialPort free];
+    [_serialPort release];
+    _serialPort = nil;
+
+    [_data release];
+    _data = nil;
+    _dataChanged = YES;
 }
 
 @end
