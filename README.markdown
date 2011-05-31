@@ -8,3 +8,5 @@ THANKS
 
 NOTES
 - the Serial Devices subpatch vends callout (/dev/cu.*) devices, not the callin (/dev/tty.*) half
+
+- the Serial Reader internally uses \n as the break string
