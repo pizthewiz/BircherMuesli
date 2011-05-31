@@ -168,8 +168,8 @@
     NSArray* removedPorts = [[notification userInfo] objectForKey:AMSerialPortListRemovedPorts];
     for (AMSerialPort* serialPort in removedPorts) {
         CCDebugLog(@"REMOVING PORT: %@", serialPort);
-        if (![_deviceList indexOfObject:[serialPort bsdPath]])
-            CCErrorLog(@"WARNING - attempting to remove port not in device list");
+        if ([_deviceList indexOfObject:[serialPort bsdPath]] == NSNotFound)
+            CCErrorLog(@"WARNING - attempting to remove port at path '%@' not in device list %@", [serialPort bsdPath], _deviceList);
         [_deviceList removeObject:[serialPort bsdPath]];
     }
 
