@@ -145,7 +145,7 @@
 
 #pragma mark - SERIAL PORT DELEGATE
 
-- (void)serialPortReadData:(NSDictionary*)dataDictionary {
+- (void)serialPort:(AMSerialPort*) readData:(NSData*)data {
     CCDebugLogSelector();
 }
 
