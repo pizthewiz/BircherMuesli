@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D80CAA6E1394887F00F6F861 /* AMSerialPortAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9F113906847001FE2A5 /* AMSerialPortAdditions.m */; };
 		D8A4E56C1390A4CA006AD752 /* BMDeviceReaderPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A4E56B1390A4CA006AD752 /* BMDeviceReaderPlugIn.m */; };
 		D8AFA9A7138F406D001FE2A5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFA9A6138F406D001FE2A5 /* Cocoa.framework */; };
 		D8AFA9A9138F406D001FE2A5 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFA9A8138F406D001FE2A5 /* Quartz.framework */; };
@@ -237,9 +238,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8AFA9B9138F406D001FE2A5 /* BMDeviceListPlugIn.m in Sources */,
-				D8AFAA0E13906A1C001FE2A5 /* AMSerialPort.m in Sources */,
-				D8AFAA0D13906A06001FE2A5 /* AMSerialPortList.m in Sources */,
 				D8A4E56C1390A4CA006AD752 /* BMDeviceReaderPlugIn.m in Sources */,
+				D8AFAA0E13906A1C001FE2A5 /* AMSerialPort.m in Sources */,
+				D80CAA6E1394887F00F6F861 /* AMSerialPortAdditions.m in Sources */,
+				D8AFAA0D13906A06001FE2A5 /* AMSerialPortList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,10 +7,9 @@
 //
 
 #import <Quartz/Quartz.h>
+#import "AMSerialPort.h"
 
-@class AMSerialPort;
-
-@interface BMDeviceReaderPlugIn : QCPlugIn {
+@interface BMDeviceReaderPlugIn : QCPlugIn <AMSerialPortDelegate> {
 @private
     AMSerialPort* _serialPort;
 }

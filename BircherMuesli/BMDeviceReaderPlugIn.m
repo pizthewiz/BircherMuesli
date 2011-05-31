@@ -9,9 +9,13 @@
 #import "BMDeviceReaderPlugIn.h"
 #import "BircherMuesli.h"
 #import "AMSerialPort.h"
+#import "AMSerialPortAdditions.h"
+#import "AMSerialPortList.h"
 
 @interface BMDeviceReaderPlugIn()
 @property (nonatomic, retain) AMSerialPort* serialPort;
+- (void)_setupSerialDeviceWithPath:(NSString*)path atBaudRate:(NSUInteger)baudRate;
+- (void)_tearDownSerialDevice;
 @end
 
 @implementation BMDeviceReaderPlugIn
@@ -58,13 +62,13 @@
 }
 
 - (void)finalize {
-    [_serialPort release];
+    [self _tearDownSerialDevice];
 
 	[super finalize];
 }
 
 - (void)dealloc {
-    [_serialPort release];
+    [self _tearDownSerialDevice];
 
 	[super dealloc];
 }
@@ -77,6 +81,8 @@
      Return NO in case of fatal failure (this will prevent rendering of the composition to start).
      */
 
+    CCDebugLogSelector();
+
 	return YES;
 }
 
@@ -84,6 +90,8 @@
 	/*
      Called by Quartz Composer when the plug-in instance starts being used by Quartz Composer.
      */
+
+    CCDebugLogSelector();
 }
 
 - (BOOL)execute:(id <QCPlugInContext>)context atTime:(NSTimeInterval)time withArguments:(NSDictionary*)arguments {
@@ -93,14 +101,25 @@
      Return NO in case of failure during the execution (this will prevent rendering of the current frame to complete).
      */
 
+//    if (dataChanged) {
+//        self.outputData = _outputData;
+//    }
+
     // bail on empty device path
     if ([self.inputDevicePath isEqualToString:@""])
         return YES;
 
-    if (!([self didValueForInputKeyChange:@"inputDevicePath"] && [self didValueForInputKeyChange:@"inputDeviceBaudRate"] && _serialPort))
-        return YES;
+    // negotiate serial connection
+    if ([self didValueForInputKeyChange:@"inputDevicePath"] || [self didValueForInputKeyChange:@"inputDeviceBaudRate"]) {
+        [self _setupSerialDeviceWithPath:self.inputDevicePath atBaudRate:self.inputDeviceBaudRate];
+    }
 
-    CCDebugLogSelector();
+    // TODO - return NO?
+    if (!_serialPort) {
+        return YES;
+    }
+
+//    CCDebugLogSelector();
 
     return YES;
 }
@@ -109,12 +128,69 @@
 	/*
      Called by Quartz Composer when the plug-in instance stops being used by Quartz Composer.
      */
+
+    CCDebugLogSelector();
 }
 
 - (void)stopExecution:(id <QCPlugInContext>)context {
 	/*
      Called by Quartz Composer when rendering of the composition stops: perform any required cleanup for the plug-in.
      */
+
+    CCDebugLogSelector();
+
+    // TODO - should tear down serial device
+    [self _tearDownSerialDevice];
+}
+
+#pragma mark - SERIAL PORT DELEGATE
+
+- (void)serialPortReadData:(NSDictionary*)dataDictionary {
+    CCDebugLogSelector();
+}
+
+#pragma mark - PRIVATE
+
+- (void)_setupSerialDeviceWithPath:(NSString*)path atBaudRate:(NSUInteger)baudRate {
+    CCDebugLogSelector();
+
+    [self _tearDownSerialDevice];
+
+    AMSerialPort* serialPort = [[AMSerialPortList sharedPortList] serialPortWithPath:path];
+    if (!serialPort) {
+        CCErrorLog(@"ERROR - failed to find serial port at path '%@' to attach to", path);
+        return;
+    }
+
+    if (![serialPort available]) {
+        CCErrorLog(@"ERROR - serial port '%@' is not available", serialPort);
+        return;
+    }
+
+    [serialPort setDelegate:self];
+
+    id fileHandle = [serialPort open];
+    if (!fileHandle) {
+        CCErrorLog(@"ERROR - failed to open serial port: %@", serialPort);
+        return;
+    }
+
+    // NB - strangely set spead after opening
+    [serialPort setSpeed:baudRate];
+    BOOL status = [serialPort commitChanges];
+    if (!status) {
+        CCErrorLog(@"ERROR - failed to set speed %lu on port: %@", baudRate, serialPort);
+    }
+
+    self.serialPort = serialPort;
+    [self.serialPort readDataInBackground];
+}
+
+- (void)_tearDownSerialDevice {
+//    [self.serialPort setDelegate:nil];
+    [self.serialPort stopReadInBackground];
+    [self.serialPort free];
+    self.serialPort = nil;
 }
 
 @end
