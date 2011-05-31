@@ -117,11 +117,11 @@
     // negotiate serial connection
     if ([self didValueForInputKeyChange:@"inputDevicePath"] || [self didValueForInputKeyChange:@"inputDeviceBaudRate"]) {
         [self _setupSerialDeviceWithPath:self.inputDevicePath atBaudRate:self.inputDeviceBaudRate];
-    }
 
-    // store for safe keeping, may be needed in replug situation
-    self.devicePath = self.inputDevicePath;
-    _deviceBaudRate = self.inputDeviceBaudRate;
+        // store for safe keeping, may be needed in replug situation
+        self.devicePath = self.inputDevicePath;
+        _deviceBaudRate = self.inputDeviceBaudRate;
+    }
 
     // TODO - return NO?
     if (!_serialPort) {
@@ -173,7 +173,7 @@
         // continue listening
         [serialPort readDataInBackground];
     } else {
-        CCErrorLog(@"ERROR - port closed! %@", serialPort);
+        CCErrorLog(@"ERROR - port closed! %@", [serialPort name]);
         [self _tearDownSerialDevice];
     }
 }
@@ -192,15 +192,19 @@
     }
 
     if (![serialPort available]) {
-        CCErrorLog(@"ERROR - serial port '%@' is not available", serialPort);
+        CCErrorLog(@"ERROR - serial port '%@' is not available", [serialPort name]);
         return;
     }
 
-    [serialPort setDelegate:self];
+    if (serialPort.readDelegate) {
+        CCErrorLog(@"ERROR - serial port '%@' already has read delegate", [serialPort name]);
+        return;
+    }
+    serialPort.readDelegate = self;
 
     id fileHandle = [serialPort open];
     if (!fileHandle) {
-        CCErrorLog(@"ERROR - failed to open serial port: %@", serialPort);
+        CCErrorLog(@"ERROR - failed to open serial port: %@", [serialPort name]);
         return;
     }
 
@@ -209,7 +213,7 @@
     [serialPort clearError];
     BOOL status = [serialPort commitChanges];
     if (!status) {
-        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", baudRate, [serialPort errorCode], serialPort);
+        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", baudRate, [serialPort errorCode], [serialPort name]);
     }
 
     _serialPort = [serialPort retain];

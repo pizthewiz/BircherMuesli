@@ -98,7 +98,30 @@
      Only read from the plug-in inputs and produce a result (by writing to the plug-in outputs or rendering to the destination OpenGL context) within that method and nowhere else.
      Return NO in case of failure during the execution (this will prevent rendering of the current frame to complete).
      */
-    
+
+    // bail on empty device path
+    if ([self.inputDevicePath isEqualToString:@""])
+        return YES;
+
+    // negotiate serial connection
+    if ([self didValueForInputKeyChange:@"inputDevicePath"] || [self didValueForInputKeyChange:@"inputDeviceBaudRate"]) {
+        [self _setupSerialDeviceWithPath:self.inputDevicePath atBaudRate:self.inputDeviceBaudRate];
+
+        // store for safe keeping, may be needed in replug situation
+        self.devicePath = self.inputDevicePath;
+        _deviceBaudRate = self.inputDeviceBaudRate;
+    }
+
+    // TODO - return NO?
+    if (!_serialPort) {
+        return YES;
+    }
+
+    if (self.inputSendSignal) {
+        // TODO - write
+        CCDebugLog(@"SHOULD WRITE");
+    }
+
 	return YES;
 }
 
@@ -118,6 +141,12 @@
     CCDebugLogSelector();
 }
 
+#pragma mark - SERIAL PORT DELEGATE
+
+- (void)serialPortWriteProgress:(NSDictionary *)dataDictionary {
+    CCDebugLogSelector();
+}
+
 #pragma mark - PRIVATE
 
 - (void)_setupSerialDeviceWithPath:(NSString*)path atBaudRate:(NSUInteger)baudRate {
@@ -132,15 +161,19 @@
     }
 
     if (![serialPort available]) {
-        CCErrorLog(@"ERROR - serial port '%@' is not available", serialPort);
+        CCErrorLog(@"ERROR - serial port '%@' is not available", [serialPort name]);
         return;
     }
 
-    [serialPort setDelegate:self];
+    if (serialPort.writeDelegate) {
+        CCErrorLog(@"ERROR - serial port '%@' already has write delegate", [serialPort name]);
+        return;
+    }
+    serialPort.writeDelegate = self;
 
     id fileHandle = [serialPort open];
     if (!fileHandle) {
-        CCErrorLog(@"ERROR - failed to open serial port: %@", serialPort);
+        CCErrorLog(@"ERROR - failed to open serial port: %@", [serialPort name]);
         return;
     }
 
@@ -149,7 +182,7 @@
     [serialPort clearError];
     BOOL status = [serialPort commitChanges];
     if (!status) {
-        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", baudRate, [serialPort errorCode], serialPort);
+        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", baudRate, [serialPort errorCode], [serialPort name]);
     }
 
     _serialPort = [serialPort retain];

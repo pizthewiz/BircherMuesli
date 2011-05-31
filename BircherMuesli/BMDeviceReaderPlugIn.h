@@ -9,7 +9,7 @@
 #import <Quartz/Quartz.h>
 #import "AMSerialPort.h"
 
-@interface BMDeviceReaderPlugIn : QCPlugIn <AMSerialPortDelegate> {
+@interface BMDeviceReaderPlugIn : QCPlugIn <AMSerialPortReadDelegate> {
 @private
     AMSerialPort* _serialPort;
     NSString* _devicePath;
