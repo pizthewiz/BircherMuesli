@@ -202,9 +202,13 @@
 
     _serialPort = [serialPort retain];
     [_serialPort readDataInBackground];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didRemoveSerialPorts:) name:AMSerialPortListDidRemovePortsNotification object:nil];
 }
 
 - (void)_tearDownSerialDevice {
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:AMSerialPortListDidRemovePortsNotification object:nil];
+
     [_serialPort stopReadInBackground];
     [_serialPort free];
     [_serialPort release];
@@ -213,6 +217,17 @@
     [_data release];
     _data = nil;
     _dataChanged = YES;
+}
+
+- (void)_didRemoveSerialPorts:(NSNotification*)notification {
+    CCDebugLogSelector();
+
+    NSArray* removedPorts = [[notification userInfo] objectForKey:AMSerialPortListRemovedPorts];
+    if (![removedPorts containsObject:_serialPort])
+        return;
+
+    CCErrorLog(@"ERROR - serial device '%@' has been yanked!", [_serialPort name]);
+    [self _tearDownSerialDevice];
 }
 
 @end
