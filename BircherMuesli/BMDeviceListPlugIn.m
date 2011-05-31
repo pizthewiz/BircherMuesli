@@ -20,7 +20,7 @@
 
 @implementation BMDeviceListPlugIn
 
-@dynamic outputDeviceList, outputListUpdated;
+@dynamic outputDeviceList, outputDeviceListUpdatedSignal;
 
 + (NSDictionary*)attributes {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -33,7 +33,7 @@
 + (NSDictionary*)attributesForPropertyPortWithKey:(NSString*)key {
     if ([key isEqualToString:@"outputDeviceList"])
         return [NSDictionary dictionaryWithObjectsAndKeys:@"Device List", QCPortAttributeNameKey, nil];
-    else if ([key isEqualToString:@"outputListUpdated"])
+    else if ([key isEqualToString:@"outputDeviceListUpdatedSignal"])
         return [NSDictionary dictionaryWithObjectsAndKeys:@"List Updated", QCPortAttributeNameKey, nil];
 	return nil;
 }
@@ -93,12 +93,14 @@
 	Return NO in case of failure during the execution (this will prevent rendering of the current frame to complete).
 	*/
 
-    if (!_deviceListChanged)
+    if (!_deviceListUpdatedSignalDidChange)
         return YES;
 
-    self.outputDeviceList = _deviceList;
-    self.outputListUpdated = _deviceListChanged;
-    _deviceListChanged = NO;
+    if (_deviceListUpdatedSignal) 
+        self.outputDeviceList = _deviceList;
+    self.outputDeviceListUpdatedSignal = _deviceListUpdatedSignal;
+    _deviceListUpdatedSignalDidChange = _deviceListUpdatedSignal;
+    _deviceListUpdatedSignal = NO;
 
 	return YES;
 }
@@ -132,7 +134,8 @@
         [_deviceList addObject:[serialPort bsdPath]];
     }
 
-    _deviceListChanged = [_deviceList count] != 0;
+    _deviceListUpdatedSignal = YES;
+    _deviceListUpdatedSignalDidChange = YES;
 }
 
 - (void)_tearDownPortListening {
@@ -141,6 +144,9 @@
 
     [_deviceList release];
     _deviceList = nil;
+
+    _deviceListUpdatedSignal = YES;
+    _deviceListUpdatedSignalDidChange = YES;
 }
 
 - (void)_didAddSerialPorts:(NSNotification*)notification {
@@ -152,7 +158,8 @@
         [_deviceList addObject:[serialPort bsdPath]];
     }
 
-    _deviceListChanged = YES;
+    _deviceListUpdatedSignal = YES;
+    _deviceListUpdatedSignalDidChange = YES;
 }
 
 - (void)_didRemoveSerialPorts:(NSNotification*)notification {
@@ -166,7 +173,8 @@
         [_deviceList removeObject:[serialPort bsdPath]];
     }
 
-    _deviceListChanged = YES;
+    _deviceListUpdatedSignal = YES;
+    _deviceListUpdatedSignalDidChange = YES;
 }
 
 @end

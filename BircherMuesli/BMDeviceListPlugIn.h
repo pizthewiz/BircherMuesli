@@ -11,8 +11,9 @@
 @interface BMDeviceListPlugIn : QCPlugIn {
 @private
     NSMutableArray* _deviceList;
-    BOOL _deviceListChanged;
+    BOOL _deviceListUpdatedSignal;
+    BOOL _deviceListUpdatedSignalDidChange;
 }
 @property (nonatomic, assign) NSArray* outputDeviceList;
-@property (nonatomic) BOOL outputListUpdated;
+@property (nonatomic) BOOL outputDeviceListUpdatedSignal;
 @end
