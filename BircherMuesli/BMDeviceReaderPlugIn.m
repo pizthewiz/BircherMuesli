@@ -206,9 +206,10 @@
 
     // NB - strangely set spead after opening
     [serialPort setSpeed:baudRate];
+    [serialPort clearError];
     BOOL status = [serialPort commitChanges];
     if (!status) {
-        CCErrorLog(@"ERROR - failed to set speed %lu on port: %@", baudRate, serialPort);
+        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", baudRate, [serialPort errorCode], serialPort);
     }
 
     _serialPort = [serialPort retain];
