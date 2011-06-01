@@ -201,6 +201,7 @@
 - (void)_tearDownSerialDevice {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:AMSerialPortListDidRemovePortsNotification object:nil];
 
+    _serialPort.writeDelegate = nil;
     [_serialPort free];
     [_serialPort release];
     _serialPort = nil;

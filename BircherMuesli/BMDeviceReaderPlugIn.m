@@ -226,6 +226,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:AMSerialPortListDidRemovePortsNotification object:nil];
 
     [_serialPort stopReadInBackground];
+    _serialPort.readDelegate = nil;
     [_serialPort free];
     [_serialPort release];
     _serialPort = nil;
