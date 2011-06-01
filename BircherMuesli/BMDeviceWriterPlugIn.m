@@ -15,6 +15,8 @@
 @interface BMDeviceWriterPlugIn()
 @property (nonatomic, retain) AMSerialPort* serialPort;
 @property (nonatomic, retain) NSString* devicePath;
+- (void)_didAddSerialPorts:(NSNotification*)notification;
+- (void)_didRemoveSerialPorts:(NSNotification*)notification;
 - (void)_setupSerialDeviceWithPath:(NSString*)path atBaudRate:(NSUInteger)baudRate;
 - (void)_tearDownSerialDevice;
 @end
@@ -109,6 +111,7 @@
 
     // negotiate serial connection
     if ([self didValueForInputKeyChange:@"inputDevicePath"] || [self didValueForInputKeyChange:@"inputDeviceBaudRate"]) {
+        CCDebugLog(@"device path or baud rate changed, will negotiate connection");
         [self _setupSerialDeviceWithPath:self.inputDevicePath atBaudRate:self.inputDeviceBaudRate];
     }
 
@@ -186,7 +189,7 @@
     CCWarningLog(@"WARNING - serial device '%@' was yanked", [self.serialPort bsdPath]);
 
     [self _tearDownSerialDevice];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didAddSerialPorts:) name:AMSerialPortListDidAddPortsNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didAddSerialPorts:) name:AMSerialPortListDidAddPortsNotification object:nil];
 }
 
 #pragma mark - PRIVATE
