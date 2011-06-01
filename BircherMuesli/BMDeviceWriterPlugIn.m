@@ -42,7 +42,7 @@
     else if ([key isEqualToString:@"inputData"])
         return [NSDictionary dictionaryWithObjectsAndKeys:@"Data", QCPortAttributeNameKey, nil];
     else if ([key isEqualToString:@"inputSendSignal"])
-        return [NSDictionary dictionaryWithObjectsAndKeys:@"Send Data Signal", QCPortAttributeNameKey, nil];
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"Send Signal", QCPortAttributeNameKey, nil];
 	return nil;
 }
 
