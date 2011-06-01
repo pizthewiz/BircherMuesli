@@ -1,4 +1,8 @@
 
+v0.3.0 (31 May 2011)
+* add Serial Writer patch
+* reader and writer now support unplug/replug
+
 v0.2.0 (30 May 2011)
 * add Serial Reader patch
 * offer List Updated output from device list patch
