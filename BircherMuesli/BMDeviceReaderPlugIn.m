@@ -246,7 +246,7 @@
     [serialPort clearError];
     BOOL status = [serialPort commitChanges];
     if (!status) {
-        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", baudRate, [serialPort errorCode], [serialPort bsdPath]);
+        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", (unsigned long)baudRate, [serialPort errorCode], [serialPort bsdPath]);
     }
 
     self.serialPort = serialPort;
