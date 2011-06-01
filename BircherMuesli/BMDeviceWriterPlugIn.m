@@ -81,6 +81,8 @@
 
     CCDebugLogSelector();
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didAddSerialPorts:) name:AMSerialPortListDidAddPortsNotification object:nil];
+
 	return YES;
 }
 
@@ -136,7 +138,9 @@
 - (void)stopExecution:(id <QCPlugInContext>)context {
 	/*
      Called by Quartz Composer when rendering of the composition stops: perform any required cleanup for the plug-in.
-     */    
+     */
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AMSerialPortListDidAddPortsNotification object:nil];
 
     CCDebugLogSelector();
 }
@@ -174,6 +178,7 @@
     id fileHandle = [serialPort open];
     if (!fileHandle) {
         CCErrorLog(@"ERROR - failed to open serial port: %@", [serialPort bsdPath]);
+        serialPort.writeDelegate = nil;        
         return;
     }
 

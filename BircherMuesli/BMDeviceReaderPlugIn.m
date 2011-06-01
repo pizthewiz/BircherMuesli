@@ -201,6 +201,7 @@
     id fileHandle = [serialPort open];
     if (!fileHandle) {
         CCErrorLog(@"ERROR - failed to open serial port: %@", [serialPort bsdPath]);
+        serialPort.readDelegate = nil;
         return;
     }
 
