@@ -89,6 +89,7 @@ task :create_archive, [:build_path, :product_name] do |t, args|
 
   # TODO - this should only be the product itself not the whole directory
   %x{ ditto "#{build_dir}" "#{dir_name}"  }
+  FileUtils.rm_r(Dir.glob(File.join(dir_name, '*.dSYM')), {:secure => true})
   FileUtils.cp ARCHIVE_FILES, dir_name
 
   # TODO - probably want to zap dot files too
