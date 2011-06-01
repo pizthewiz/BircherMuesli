@@ -117,10 +117,6 @@
     // negotiate serial connection
     if ([self didValueForInputKeyChange:@"inputDevicePath"] || [self didValueForInputKeyChange:@"inputDeviceBaudRate"]) {
         [self _setupSerialDeviceWithPath:self.inputDevicePath atBaudRate:self.inputDeviceBaudRate];
-
-        // store for safe keeping, may be needed in replug situation
-        self.devicePath = self.inputDevicePath;
-        _deviceBaudRate = self.inputDeviceBaudRate;
     }
 
     // TODO - return NO?
@@ -192,19 +188,19 @@
     }
 
     if (![serialPort available]) {
-        CCErrorLog(@"ERROR - serial port '%@' is not available", [serialPort name]);
+        CCErrorLog(@"ERROR - serial port '%@' is not available", [serialPort bsdPath]);
         return;
     }
 
     if (serialPort.readDelegate) {
-        CCErrorLog(@"ERROR - serial port '%@' already has read delegate", [serialPort name]);
+        CCErrorLog(@"ERROR - serial port '%@' already has read delegate", [serialPort bsdPath]);
         return;
     }
     serialPort.readDelegate = self;
 
     id fileHandle = [serialPort open];
     if (!fileHandle) {
-        CCErrorLog(@"ERROR - failed to open serial port: %@", [serialPort name]);
+        CCErrorLog(@"ERROR - failed to open serial port: %@", [serialPort bsdPath]);
         return;
     }
 
@@ -213,11 +209,15 @@
     [serialPort clearError];
     BOOL status = [serialPort commitChanges];
     if (!status) {
-        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", baudRate, [serialPort errorCode], [serialPort name]);
+        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", baudRate, [serialPort errorCode], [serialPort bsdPath]);
     }
 
     _serialPort = [serialPort retain];
     [_serialPort readDataInBackground];
+
+    // store for safe keeping, may be needed in replug situation
+    self.devicePath = path;
+    _deviceBaudRate = baudRate;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didRemoveSerialPorts:) name:AMSerialPortListDidRemovePortsNotification object:nil];
 }
@@ -254,7 +254,7 @@
     if (![removedPorts containsObject:_serialPort])
         return;
 
-    CCErrorLog(@"ERROR - serial device '%@' has been yanked!", [_serialPort name]);
+    CCErrorLog(@"ERROR - serial device '%@' has been yanked!", [_serialPort bsdPath]);
 
     [self _tearDownSerialDevice];
 }

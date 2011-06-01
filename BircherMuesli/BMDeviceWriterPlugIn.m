@@ -106,10 +106,6 @@
     // negotiate serial connection
     if ([self didValueForInputKeyChange:@"inputDevicePath"] || [self didValueForInputKeyChange:@"inputDeviceBaudRate"]) {
         [self _setupSerialDeviceWithPath:self.inputDevicePath atBaudRate:self.inputDeviceBaudRate];
-
-        // store for safe keeping, may be needed in replug situation
-        self.devicePath = self.inputDevicePath;
-        _deviceBaudRate = self.inputDeviceBaudRate;
     }
 
     // TODO - return NO?
@@ -118,8 +114,16 @@
     }
 
     if (self.inputSendSignal) {
-        // TODO - write
-        CCDebugLog(@"SHOULD WRITE");
+        if (![_serialPort isOpen]) {
+            CCErrorLog(@"ERROR - attempting to write to closed serial port '%@'", [_serialPort name]);
+            return NO;
+        }
+        NSError* error;
+        [_serialPort writeString:self.inputData usingEncoding:NSUTF8StringEncoding error:&error];
+        if (error && NO) {
+            CCErrorLog(@"ERROR - failed to write to port '%@' with error: %@", [_serialPort name], error);
+            return NO;
+        }
     }
 
 	return YES;
@@ -161,19 +165,19 @@
     }
 
     if (![serialPort available]) {
-        CCErrorLog(@"ERROR - serial port '%@' is not available", [serialPort name]);
+        CCErrorLog(@"ERROR - serial port '%@' is not available", [serialPort bsdPath]);
         return;
     }
 
     if (serialPort.writeDelegate) {
-        CCErrorLog(@"ERROR - serial port '%@' already has write delegate", [serialPort name]);
+        CCErrorLog(@"ERROR - serial port '%@' already has write delegate", [serialPort bsdPath]);
         return;
     }
     serialPort.writeDelegate = self;
 
     id fileHandle = [serialPort open];
     if (!fileHandle) {
-        CCErrorLog(@"ERROR - failed to open serial port: %@", [serialPort name]);
+        CCErrorLog(@"ERROR - failed to open serial port: %@", [serialPort bsdPath]);
         return;
     }
 
@@ -182,10 +186,14 @@
     [serialPort clearError];
     BOOL status = [serialPort commitChanges];
     if (!status) {
-        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", baudRate, [serialPort errorCode], [serialPort name]);
+        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", baudRate, [serialPort errorCode], [serialPort bsdPath]);
     }
 
     _serialPort = [serialPort retain];
+
+    // store for safe keeping, may be needed in replug situation
+    self.devicePath = path;
+    _deviceBaudRate = baudRate;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didRemoveSerialPorts:) name:AMSerialPortListDidRemovePortsNotification object:nil];
 }
@@ -217,7 +225,7 @@
     if (![removedPorts containsObject:_serialPort])
         return;
 
-    CCErrorLog(@"ERROR - serial device '%@' has been yanked!", [_serialPort name]);
+    CCErrorLog(@"ERROR - serial device '%@' has been yanked!", [_serialPort bsdPath]);
 
     [self _tearDownSerialDevice];
 }
