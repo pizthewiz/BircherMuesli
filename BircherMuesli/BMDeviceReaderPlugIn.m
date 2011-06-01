@@ -151,7 +151,7 @@
 
 #pragma mark - SERIAL PORT DELEGATE
 
-- (void)serialPort:(AMSerialPort*)serialPort readData:(NSData*)data {
+- (void)serialPort:(AMSerialPort*)serialPort didReadData:(NSData*)data {
     CCDebugLogSelector();
 
     if ([data length]) {
