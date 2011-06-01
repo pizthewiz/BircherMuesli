@@ -13,6 +13,7 @@
 #import "AMSerialPortList.h"
 
 @interface BMDeviceWriterPlugIn()
+@property (nonatomic, retain) AMSerialPort* serialPort;
 @property (nonatomic, retain) NSString* devicePath;
 - (void)_setupSerialDeviceWithPath:(NSString*)path atBaudRate:(NSUInteger)baudRate;
 - (void)_tearDownSerialDevice;
@@ -21,7 +22,7 @@
 @implementation BMDeviceWriterPlugIn
 
 @dynamic inputDevicePath, inputDeviceBaudRate, inputData, inputSendSignal;
-@synthesize devicePath = _devicePath;
+@synthesize serialPort = _serialPort, devicePath = _devicePath;
 
 + (NSDictionary*)attributes {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -56,18 +57,17 @@
 
 #pragma mark -
 
-- (id)init {
-	self = [super init];
-	if (self) {
-	}
-	return self;
-}
-
 - (void)finalize {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self _tearDownSerialDevice];
+
 	[super finalize];
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self _tearDownSerialDevice];
+
 	[super dealloc];
 }
 
@@ -81,8 +81,6 @@
 
     CCDebugLogSelector();
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didAddSerialPorts:) name:AMSerialPortListDidAddPortsNotification object:nil];
-
 	return YES;
 }
 
@@ -92,6 +90,10 @@
      */
 
     CCDebugLogSelector();
+
+    // setup serial port when possible
+    if (self.devicePath && _deviceBaudRate)
+        [self _setupSerialDeviceWithPath:self.devicePath atBaudRate:_deviceBaudRate];
 }
 
 - (BOOL)execute:(id <QCPlugInContext>)context atTime:(NSTimeInterval)time withArguments:(NSDictionary*)arguments {
@@ -111,17 +113,19 @@
     }
 
     // TODO - return NO?
-    if (!_serialPort) {
+    if (!self.serialPort) {
         return YES;
     }
 
+//    CCDebugLogSelector();
+
     if (self.inputSendSignal) {
-        if (![_serialPort isOpen]) {
-            CCErrorLog(@"ERROR - attempting to write to closed serial port '%@'", [_serialPort name]);
+        if (![self.serialPort isOpen]) {
+            CCErrorLog(@"ERROR - attempting to write to closed serial port '%@'", [self.serialPort name]);
             return NO;
         }
         NSData* data = [self.inputData dataUsingEncoding:NSUTF8StringEncoding];
-        [_serialPort writeDataInBackground:data];
+        [self.serialPort writeDataInBackground:data];
     }
 
 	return YES;
@@ -133,14 +137,14 @@
      */
 
     CCDebugLogSelector();
+
+    [self _tearDownSerialDevice];
 }
 
 - (void)stopExecution:(id <QCPlugInContext>)context {
 	/*
      Called by Quartz Composer when rendering of the composition stops: perform any required cleanup for the plug-in.
      */
-
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AMSerialPortListDidAddPortsNotification object:nil];
 
     CCDebugLogSelector();
 }
@@ -149,6 +153,40 @@
 
 - (void)serialPort:(AMSerialPort*)port didMakeWriteProgress:(NSUInteger)progress total:(NSUInteger)total {
     CCDebugLogSelector();
+}
+
+#pragma mark - SERIAL PORT NOTIFICATIONS
+
+- (void)_didAddSerialPorts:(NSNotification*)notification {
+    CCDebugLogSelector();
+
+    AMSerialPort* serialPort = nil;
+    NSArray* addedPorts = [[notification userInfo] objectForKey:AMSerialPortListAddedPorts];
+    for (AMSerialPort* p in addedPorts) {
+        if (![[p bsdPath] isEqualToString:self.devicePath])
+            continue;
+        serialPort = p;
+        break;
+    }
+
+    if (!serialPort)
+        return;
+
+    [self _setupSerialDeviceWithPath:self.devicePath atBaudRate:_deviceBaudRate];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AMSerialPortListDidAddPortsNotification object:nil];
+}
+
+- (void)_didRemoveSerialPorts:(NSNotification*)notification {
+    CCDebugLogSelector();
+
+    NSArray* removedPorts = [[notification userInfo] objectForKey:AMSerialPortListRemovedPorts];
+    if (![removedPorts containsObject:self.serialPort])
+        return;
+
+    CCWarningLog(@"WARNING - serial device '%@' was yanked", [self.serialPort bsdPath]);
+
+    [self _tearDownSerialDevice];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didAddSerialPorts:) name:AMSerialPortListDidAddPortsNotification object:nil];
 }
 
 #pragma mark - PRIVATE
@@ -190,9 +228,9 @@
         CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", baudRate, [serialPort errorCode], [serialPort bsdPath]);
     }
 
-    _serialPort = [serialPort retain];
+    self.serialPort = serialPort;
 
-    // store for safe keeping, may be needed in replug situation
+    // store for safe keeping, may be needed in unplug/replug or stop/start situation
     self.devicePath = path;
     _deviceBaudRate = baudRate;
 
@@ -202,34 +240,9 @@
 - (void)_tearDownSerialDevice {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:AMSerialPortListDidRemovePortsNotification object:nil];
 
-    _serialPort.writeDelegate = nil;
-    [_serialPort free];
-    [_serialPort release];
-    _serialPort = nil;
-}
-
-- (void)_didAddSerialPorts:(NSNotification*)notification {
-    CCDebugLogSelector();
-
-    NSArray* addedPorts = [[notification userInfo] objectForKey:AMSerialPortListAddedPorts];
-    for (AMSerialPort* serialPort in addedPorts) {
-        if (![[serialPort bsdPath] isEqualToString:self.devicePath])
-            continue;
-        [self _setupSerialDeviceWithPath:self.devicePath atBaudRate:_deviceBaudRate];
-        break;
-    }
-}
-
-- (void)_didRemoveSerialPorts:(NSNotification*)notification {
-    CCDebugLogSelector();
-
-    NSArray* removedPorts = [[notification userInfo] objectForKey:AMSerialPortListRemovedPorts];
-    if (![removedPorts containsObject:_serialPort])
-        return;
-
-    CCErrorLog(@"ERROR - serial device '%@' has been yanked!", [_serialPort bsdPath]);
-
-    [self _tearDownSerialDevice];
+    self.serialPort.writeDelegate = nil;
+    [self.serialPort free];
+    self.serialPort = nil;
 }
 
 @end
