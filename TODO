@@ -3,15 +3,15 @@ DEVICE LIST
 NOW
 [X] vendor AMSerialPort
 [X] expose List Updated output
-[ ] offer simple filter in inspector
-
+[ ] add simple javascript search over list
 LATER
+[ ] offer simple filter in inspector
 [ ] struct of structs {bsdPath, name, type, isAvailable}
-
 
 -------------------------------------------------
 DEVICE READ
 NOW
+[ ] investigate why reader sometimes fails to reconnect on qc stop/start
 LATER
 
 -------------------------------------------------
