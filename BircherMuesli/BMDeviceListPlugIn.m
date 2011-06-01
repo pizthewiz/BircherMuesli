@@ -75,7 +75,7 @@
 	Return NO in case of fatal failure (this will prevent rendering of the composition to start).
 	*/
 
-    [self _setupPortListening];
+    CCDebugLogSelector();
 
 	return YES;
 }
@@ -84,6 +84,10 @@
 	/*
 	Called by Quartz Composer when the plug-in instance starts being used by Quartz Composer.
 	*/
+
+    CCDebugLogSelector();
+
+    [self _setupPortListening];
 }
 
 - (BOOL)execute:(id <QCPlugInContext>)context atTime:(NSTimeInterval)time withArguments:(NSDictionary*)arguments {
@@ -109,6 +113,10 @@
 	/*
 	Called by Quartz Composer when the plug-in instance stops being used by Quartz Composer.
 	*/
+
+    CCDebugLogSelector();
+
+    [self _tearDownPortListening];
 }
 
 - (void)stopExecution:(id <QCPlugInContext>)context {
@@ -116,7 +124,7 @@
 	Called by Quartz Composer when rendering of the composition stops: perform any required cleanup for the plug-in.
 	*/
 
-    [self _tearDownPortListening];
+    CCDebugLogSelector();
 }
 
 #pragma mark - SERIAL PORT NOTIFICATIONS
