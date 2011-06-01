@@ -118,12 +118,8 @@
             CCErrorLog(@"ERROR - attempting to write to closed serial port '%@'", [_serialPort name]);
             return NO;
         }
-        NSError* error;
-        [_serialPort writeString:self.inputData usingEncoding:NSUTF8StringEncoding error:&error];
-        if (error && NO) {
-            CCErrorLog(@"ERROR - failed to write to port '%@' with error: %@", [_serialPort name], error);
-            return NO;
-        }
+        NSData* data = [self.inputData dataUsingEncoding:NSUTF8StringEncoding];
+        [_serialPort writeDataInBackground:data];
     }
 
 	return YES;
@@ -147,7 +143,7 @@
 
 #pragma mark - SERIAL PORT DELEGATE
 
-- (void)serialPortWriteProgress:(NSDictionary *)dataDictionary {
+- (void)serialPort:(AMSerialPort*)port didMakeWriteProgress:(NSUInteger)progress total:(NSUInteger)total {
     CCDebugLogSelector();
 }
 
