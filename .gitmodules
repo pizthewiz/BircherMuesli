@@ -1,0 +1,3 @@
+[submodule "vendor/AMSerialPort"]
+	path = vendor/AMSerialPort
+	url = git@github.com:pizthewiz/AMSerialPort.git
