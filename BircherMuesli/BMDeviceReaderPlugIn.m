@@ -117,8 +117,11 @@
 
     // bail on empty device path
     if ([self.inputDevicePath isEqualToString:@""]) {
-        if (self.serialPort)
+        if (self.serialPort) {
             [self _tearDownSerialDevice];
+            self.devicePath = nil;
+            _deviceBaudRate = 0;            
+        }
         return YES;
     }
 
