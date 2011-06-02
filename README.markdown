@@ -6,7 +6,7 @@ a quartz composer patch for the discovery of, reading from and writing to serial
 move BircherMuesli.plugin into ~/Library/Graphics/Quartz Composer Plug-Ins/
 
 ### NOTES
-- _device hot plugging can be problematic, instead stop the composition, plug, then start_
+- _device hot plugging can lead to a race condition somewhere, instead it is suggested that you stop the composition, plug, then start_
 - the Serial Reader internally uses \n as the break string
 - the Serial Devices subpatch vends callout (/dev/cu.\*) devices, not the callin (/dev/tty.\*) half
 
