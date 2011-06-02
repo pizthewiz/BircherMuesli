@@ -13,10 +13,12 @@ DEVICE READ
 NOW
 [X] investigate why reader sometimes fails to reconnect on qc stop/start
 [ ] some sort of delayed retry on busy device on replug
+[ ] flush input on connect
 LATER
 
 -------------------------------------------------
 DEVICE WRITE
 NOW
 [ ] some sort of delayed retry on busy device on replug
+[ ] flush output on connect?
 LATER
