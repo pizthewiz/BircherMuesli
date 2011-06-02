@@ -1,4 +1,8 @@
 
+v0.3.1 (02 June 2011)
+* reader and writer now behave when the device input is cleared
+* improve error reporting on failure to open device
+
 v0.3.0 (31 May 2011)
 * add Serial Writer patch
 * reader and writer now support stop/start
