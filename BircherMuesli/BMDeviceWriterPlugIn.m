@@ -224,12 +224,18 @@
         return;
     }
 
-    // NB - strangely set spead after opening
-    [serialPort setSpeed:baudRate];
-    [serialPort clearError];
-    BOOL status = [serialPort commitChanges];
-    if (!status) {
-        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", (unsigned long)baudRate, [serialPort errorCode], [serialPort bsdPath]);
+    // set port speed
+    int status = [serialPort setSpeed:baudRate];
+    if (status != 0) {
+        CCErrorLog(@"ERROR - failed to set speed %lu with error %d on port: %@", (unsigned long)baudRate, status, [serialPort bsdPath]);
+        serialPort.writeDelegate = nil;
+        return;
+    }
+    status = [serialPort commitChanges];
+    if (status != 0) {
+        CCErrorLog(@"ERROR - failed to commit changes with error %d after setting speed %lu on port: %@", status, (unsigned long)baudRate, [serialPort bsdPath]);
+        serialPort.writeDelegate = nil;
+        return;
     }
 
     self.serialPort = serialPort;
