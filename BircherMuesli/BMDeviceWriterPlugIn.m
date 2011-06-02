@@ -124,7 +124,7 @@
 
     if (self.inputSendSignal) {
         if (![self.serialPort isOpen]) {
-            CCErrorLog(@"ERROR - attempting to write to closed serial port '%@'", [self.serialPort name]);
+            CCErrorLog(@"ERROR - attempting to write to closed serial port '%@'", self.serialPort.name);
             return NO;
         }
         NSData* data = [self.inputData dataUsingEncoding:NSUTF8StringEncoding];
@@ -186,7 +186,7 @@
     if (![removedPorts containsObject:self.serialPort])
         return;
 
-    CCWarningLog(@"WARNING - serial device '%@' was yanked", [self.serialPort bsdPath]);
+    CCWarningLog(@"WARNING - serial device '%@' was yanked", self.serialPort.bsdPath);
 
     [self _tearDownSerialDevice];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didAddSerialPorts:) name:AMSerialPortListDidAddPortsNotification object:nil];
@@ -206,12 +206,12 @@
     }
 
     if (![serialPort available]) {
-        CCErrorLog(@"ERROR - serial port '%@' is not available", [serialPort bsdPath]);
+        CCErrorLog(@"ERROR - serial port '%@' is not available", serialPort.bsdPath);
         return;
     }
 
     if (serialPort.writeDelegate) {
-        CCErrorLog(@"ERROR - serial port '%@' already has write delegate", [serialPort bsdPath]);
+        CCErrorLog(@"ERROR - serial port '%@' already has write delegate", serialPort.bsdPath);
         return;
     }
     serialPort.writeDelegate = self;
@@ -219,7 +219,7 @@
     id fileHandle = [serialPort open];
     if (!fileHandle) {
         // TODO - would be nice if we could fetch the error
-        CCErrorLog(@"ERROR - failed to open serial port %@ - %s(%d)", [serialPort bsdPath], strerror(errno), errno);
+        CCErrorLog(@"ERROR - failed to open serial port %@ - %s(%d)", serialPort.bsdPath, strerror(errno), errno);
         serialPort.writeDelegate = nil;        
         return;
     }
@@ -227,13 +227,13 @@
     // set port speed
     int status = [serialPort setSpeed:baudRate];
     if (status != 0) {
-        CCErrorLog(@"ERROR - failed to set speed %lu with error %s(%d) on port: %@", (unsigned long)baudRate, strerror(status), status, [serialPort bsdPath]);
+        CCErrorLog(@"ERROR - failed to set speed %lu with error %s(%d) on port: %@", (unsigned long)baudRate, strerror(status), status, serialPort.bsdPath);
         serialPort.writeDelegate = nil;
         return;
     }
     status = [serialPort commitChanges];
     if (status != 0) {
-        CCErrorLog(@"ERROR - failed to commit changes with error %s(%d) after setting speed %lu on port: %@", strerror(status), status, (unsigned long)baudRate, [serialPort bsdPath]);
+        CCErrorLog(@"ERROR - failed to commit changes with error %s(%d) after setting speed %lu on port: %@", strerror(status), status, (unsigned long)baudRate, serialPort.bsdPath);
         serialPort.writeDelegate = nil;
         return;
     }

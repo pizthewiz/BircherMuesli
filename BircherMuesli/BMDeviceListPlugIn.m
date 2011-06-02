@@ -48,13 +48,6 @@
 
 #pragma mark -
 
-- (id)init {
-	self = [super init];
-	if (self) {
-	}
-	return self;
-}
-
 - (void)finalize {
     [self _tearDownPortListening];
 
@@ -100,7 +93,7 @@
     if (!_deviceListUpdatedSignalDidChange)
         return YES;
 
-    if (_deviceListUpdatedSignal) 
+    if (_deviceListUpdatedSignal)
         self.outputDeviceList = _deviceList;
     self.outputDeviceListUpdatedSignal = _deviceListUpdatedSignal;
     _deviceListUpdatedSignalDidChange = _deviceListUpdatedSignal;
@@ -135,7 +128,7 @@
     NSArray* addedPorts = [[notification userInfo] objectForKey:AMSerialPortListAddedPorts];
     for (AMSerialPort* serialPort in addedPorts) {
         CCDebugLog(@"ADDING PORT: %@", serialPort);
-        [_deviceList addObject:[serialPort bsdPath]];
+        [_deviceList addObject:serialPort.bsdPath];
     }
 
     _deviceListUpdatedSignal = YES;
@@ -148,8 +141,8 @@
     NSArray* removedPorts = [[notification userInfo] objectForKey:AMSerialPortListRemovedPorts];
     for (AMSerialPort* serialPort in removedPorts) {
         CCDebugLog(@"REMOVING PORT: %@", serialPort);
-        if ([_deviceList indexOfObject:[serialPort bsdPath]] == NSNotFound)
-            CCErrorLog(@"WARNING - attempting to remove port at path '%@' not in device list %@", [serialPort bsdPath], _deviceList);
+        if ([_deviceList indexOfObject:serialPort.bsdPath] == NSNotFound)
+            CCErrorLog(@"WARNING - attempting to remove port at path '%@' not in device list %@", serialPort.bsdPath, _deviceList);
         [_deviceList removeObject:[serialPort bsdPath]];
     }
 
