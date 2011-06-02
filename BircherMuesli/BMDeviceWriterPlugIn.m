@@ -106,13 +106,20 @@
      */
 
     // bail on empty device path
-    if ([self.inputDevicePath isEqualToString:@""])
+    if ([self.inputDevicePath isEqualToString:@""]) {
+        if (self.serialPort)
+            [self _tearDownSerialDevice];
         return YES;
+    }
 
     // negotiate serial connection
     if ([self didValueForInputKeyChange:@"inputDevicePath"] || [self didValueForInputKeyChange:@"inputDeviceBaudRate"]) {
         CCDebugLog(@"device path or baud rate changed, will negotiate connection");
         [self _setupSerialDeviceWithPath:self.inputDevicePath atBaudRate:self.inputDeviceBaudRate];
+
+        // store for safe keeping, may be needed in unplug/replug or stop/start
+        self.devicePath = self.serialPort ? self.inputDevicePath : nil;
+        _deviceBaudRate = self.serialPort ? self.inputDeviceBaudRate : 0;
     }
 
     // TODO - return NO?
@@ -239,10 +246,6 @@
     }
 
     self.serialPort = serialPort;
-
-    // store for safe keeping, may be needed in unplug/replug or stop/start situation
-    self.devicePath = path;
-    _deviceBaudRate = baudRate;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didRemoveSerialPorts:) name:AMSerialPortListDidRemovePortsNotification object:nil];
 }
