@@ -13,4 +13,5 @@ move BircherMuesli.plugin into ~/Library/Graphics/Quartz Composer Plug-Ins/
 ### THANKS
 - Andreas Mayer / Nick Zitzmann / Sean McBride for [AMSerialPort](https://github.com/pizthewiz/AMSerialPort/)
 - Anton Marini (vade) for pointing me to AMSerialPort
+- Matti Niinimäki for the Månsteri Serial Out patch inspiration
 - dang&#96;r&#96;us for javascript patch help
