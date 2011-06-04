@@ -7,8 +7,9 @@ BUNDLE_VERSION_NUMBER_KEY = 'CFBundleVersion'
 BUNDLE_VERSION_STRING_KEY = 'CFBundleShortVersionString'
 HEAD_REVISION_KEY = 'com.chordedconstructions.ProjectHEADRevision'
 
-ARCHIVE_FILES = %w(README.markdown TODO CHANGELOG Device\ Explorer.qtz)
 ARCHIVE_NAME = 'BircherMuesli'
+ARCHIVE_INCLUDE_FILES = %w(README.markdown TODO CHANGELOG Device\ Explorer.qtz)
+ARCHIVE_EXCLUDE_FILES = %w()
 
 # helpers
 def build_number
@@ -74,26 +75,32 @@ task :update_bundle_version, [:build_dir, :infoplist_path] do |t, args|
 end
 
 desc 'create archive of application and resources for distribution'
-task :create_archive, [:build_path, :product_name] do |t, args|
+task :create_archive, [:build_path, :build_product_name] do |t, args|
   build_dir = ENV['BUILT_PRODUCTS_DIR'] || args.build_path
-  product_name = ENV['FULL_PRODUCT_NAME'] || args.product_name
-  unless !build_dir.nil? && !product_name.nil?
+  build_product_name = ENV['FULL_PRODUCT_NAME'] || args.build_product_name
+  unless !build_dir.nil? && !build_product_name.nil?
     puts "ERROR - requires build directory and product name via args or 'BUILT_PRODUCTS_DIR' and 'FULL_PRODUCT_NAME'"
     exit 1
   end
 
-  base_name = File.basename(product_name, File.extname(product_name))
+  base_name = File.basename(build_product_name, File.extname(build_product_name))
   dir_name = "#{base_name}-#{build_string}"
   FileUtils.rm_r(Dir.glob("#{dir_name}/"), {:secure => true}) if File.exists? dir_name
   FileUtils.mkdir dir_name unless File.exists? dir_name
 
-  # TODO - this should only be the product itself not the whole directory
   %x{ ditto "#{build_dir}" "#{dir_name}"  }
-  FileUtils.rm_r(Dir.glob(File.join(dir_name, '*.dSYM')), {:secure => true})
-  FileUtils.cp ARCHIVE_FILES, dir_name
 
-  # TODO - probably want to zap dot files too
+  # TODO - wonder if that could be incorporated into the EXCLUDE_FILES list
+  FileUtils.rm_r(Dir.glob(File.join(dir_name, '*.dSYM')), {:secure => true})
+  exclude_file_list = ARCHIVE_EXCLUDE_FILES.collect { |f| File.join(dir_name, f) }
+  FileUtils.rm_r(exclude_file_list, {:secure => true})
+  # TODO - probably want to exclude dot files too
+
+  FileUtils.cp ARCHIVE_INCLUDE_FILES, dir_name
+
   %x{ zip -r -y "#{dir_name}.zip" "#{dir_name}" }
+  puts "created #{dir_name}.zip"
+
   FileUtils.rm_r(dir_name, {:secure => true})
 
   # %x{ open . }
