@@ -230,7 +230,7 @@
 
     [self _tearDownSerialDevice];
 
-    AMSerialPort* serialPort = [[AMSerialPortList sharedPortList] serialPortWithPath:path];
+    AMSerialPort* serialPort = [[AMSerialPortList sharedPortList] serialPortForPath:path];
     if (!serialPort) {
         CCErrorLog(@"ERROR - failed to find serial port at path '%@' to attach to", path);
         return;
