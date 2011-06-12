@@ -24,7 +24,10 @@ def head_rev
   rev = `#{GIT} rev-parse HEAD`
   rev.strip unless rev.nil? or rev.empty?
 end
-
+def select_file(filepath)
+  url = OSX::NSURL.URLWithString filepath
+  OSX::NSWorkspace.sharedWorkspace.activateFileViewerSelectingURLs([url])
+end
 
 # tasks
 desc 'update Info.plist build version number and string from git'
@@ -98,12 +101,14 @@ task :create_archive, [:build_path, :build_product_name] do |t, args|
 
   FileUtils.cp ARCHIVE_INCLUDE_FILES, dir_name
 
-  %x{ zip -r -y "#{dir_name}.zip" "#{dir_name}" }
-  puts "created #{dir_name}.zip"
+  output_filename = "#{dir_name}.zip"
+  %x{ zip -r -y #{output_filename} "#{dir_name}" }
+  puts "created #{output_filename}"
 
   FileUtils.rm_r(dir_name, {:secure => true})
 
-  # %x{ open . }
+  output_filepath = File.join(File.dirname(__FILE__), output_filename)
+  select_file(output_filepath)
 end
 
 desc 'delete archive'
