@@ -1,4 +1,7 @@
 
+GENERAL
+[ ] add basic arduino sketch and composition
+
 DEVICE LIST
 NOW
 [X] vendor AMSerialPort
