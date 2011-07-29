@@ -18,6 +18,7 @@
 		D8AFAA0D13906A06001FE2A5 /* AMSerialPortList.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9F313906847001FE2A5 /* AMSerialPortList.m */; };
 		D8AFAA0E13906A1C001FE2A5 /* AMSerialPort.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9ED13906847001FE2A5 /* AMSerialPort.m */; };
 		D8C4E5E31394C97F00D9565E /* BMDeviceWriterPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C4E5E21394C97F00D9565E /* BMDeviceWriterPlugIn.m */; };
+		D8FC241513E34C860089055F /* Device Explorer.qtz in Resources */ = {isa = PBXBuildFile; fileRef = D8A4E5681390736D006AD752 /* Device Explorer.qtz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -177,6 +178,9 @@
 /* Begin PBXProject section */
 		D8AFA999138F406D001FE2A5 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = D8AFA99C138F406D001FE2A5 /* Build configuration list for PBXProject "BircherMuesli" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -201,6 +205,7 @@
 			files = (
 				D8AFA9B5138F406D001FE2A5 /* InfoPlist.strings in Resources */,
 				D8AFA9E813906264001FE2A5 /* Localizable.strings in Resources */,
+				D8FC241513E34C860089055F /* Device Explorer.qtz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,7 +238,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/bin/rake update_bundle_version\n";
+			shellScript = "/usr/local/bin/macrake update_bundle_version\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
