@@ -1,4 +1,7 @@
 
+v0.3.2 (29 July 2011)
+* bundle example composition into plug-in and assign categories for lion
+
 v0.3.1 (02 June 2011)
 * reader and writer now behave when the device input is cleared
 * improve error reporting on failure to open device

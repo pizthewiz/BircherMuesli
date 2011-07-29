@@ -23,11 +23,25 @@
 @dynamic outputDeviceList, outputDeviceListUpdatedSignal;
 
 + (NSDictionary*)attributes {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
+    NSMutableDictionary* attributes = [NSMutableDictionary dictionaryWithObjectsAndKeys: 
         CCLocalizedString(@"DeviceListPlugInName", NULL), QCPlugInAttributeNameKey, 
         CCLocalizedString(@"DeviceListPlugInDescription", NULL), QCPlugInAttributeDescriptionKey, 
-        // TODO - add QCPlugInAttributeCategoriesKey and QCPlugInAttributeExamplesKey
         nil];
+
+#if defined(MAC_OS_X_VERSION_10_7) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7)
+    if (&QCPlugInAttributeCategoriesKey != NULL) {
+        // array with category strings
+        NSArray* categories = [NSArray arrayWithObjects:@"Source", nil];
+        [attributes setObject:categories forKey:QCPlugInAttributeCategoriesKey];
+    }
+    if (&QCPlugInAttributeExamplesKey != NULL) {
+        // array of file paths or urls relative to plugin resources
+        NSArray* examples = [NSArray arrayWithObjects:[[NSBundle bundleForClass:[self class]] URLForResource:BMExampleCompositionName withExtension:@"qtz"], nil];
+        [attributes setObject:examples forKey:QCPlugInAttributeExamplesKey];
+    }
+#endif
+
+    return (NSDictionary*)attributes;
 }
 
 + (NSDictionary*)attributesForPropertyPortWithKey:(NSString*)key {

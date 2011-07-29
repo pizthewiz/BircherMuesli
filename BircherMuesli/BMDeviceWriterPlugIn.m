@@ -27,11 +27,25 @@
 @synthesize serialPort = _serialPort, devicePath = _devicePath;
 
 + (NSDictionary*)attributes {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
+    NSMutableDictionary* attributes = [NSMutableDictionary dictionaryWithObjectsAndKeys: 
         CCLocalizedString(@"DeviceWriterPlugInName", NULL), QCPlugInAttributeNameKey, 
         CCLocalizedString(@"DeviceWriterPlugInDescription", NULL), QCPlugInAttributeDescriptionKey, 
-        // TODO - add QCPlugInAttributeCategoriesKey and QCPlugInAttributeExamplesKey
         nil];
+
+#if defined(MAC_OS_X_VERSION_10_7) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7)
+    if (&QCPlugInAttributeCategoriesKey != NULL) {
+        // array with category strings
+        NSArray* categories = [NSArray arrayWithObjects:@"Destination", nil];
+        [attributes setObject:categories forKey:QCPlugInAttributeCategoriesKey];
+    }
+    if (&QCPlugInAttributeExamplesKey != NULL) {
+        // array of file paths or urls relative to plugin resources
+        NSArray* examples = [NSArray arrayWithObjects:[[NSBundle bundleForClass:[self class]] URLForResource:BMExampleCompositionName withExtension:@"qtz"], nil];
+        [attributes setObject:examples forKey:QCPlugInAttributeExamplesKey];
+    }
+#endif
+
+    return (NSDictionary*)attributes;
 }
 
 + (NSDictionary*)attributesForPropertyPortWithKey:(NSString*)key {
