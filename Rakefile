@@ -9,7 +9,7 @@ BUNDLE_VERSION_STRING_KEY = 'CFBundleShortVersionString'
 HEAD_REVISION_KEY = 'com.chordedconstructions.ProjectHEADRevision'
 
 ARCHIVE_NAME = 'BircherMuesli'
-ARCHIVE_INCLUDE_FILES = %w(README.markdown TODO CHANGELOG Device\ Explorer.qtz Arduino\ Bidirectional.qtz)
+ARCHIVE_INCLUDE_FILES = %w(README.markdown TODO CHANGELOG Device\ Explorer.qtz Arduino\ Bidirectional.qtz pin13.pde)
 ARCHIVE_EXCLUDE_FILES = %w()
 
 # helpers

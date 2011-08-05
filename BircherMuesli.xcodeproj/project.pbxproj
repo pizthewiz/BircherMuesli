@@ -24,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		D86D0E5D13EB69D50054AA86 /* Arduino Bidirectional.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = "Arduino Bidirectional.qtz"; sourceTree = SOURCE_ROOT; };
+		D86D0E6113EB74410054AA86 /* pin13.pde */ = {isa = PBXFileReference; lastKnownFileType = text; path = pin13.pde; sourceTree = SOURCE_ROOT; };
 		D8A4E5681390736D006AD752 /* Device Explorer.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = "Device Explorer.qtz"; sourceTree = SOURCE_ROOT; };
 		D8A4E56A1390A4CA006AD752 /* BMDeviceReaderPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMDeviceReaderPlugIn.h; sourceTree = "<group>"; };
 		D8A4E56B1390A4CA006AD752 /* BMDeviceReaderPlugIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMDeviceReaderPlugIn.m; sourceTree = "<group>"; };
@@ -122,6 +123,7 @@
 				D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG */,
 				D8A4E5681390736D006AD752 /* Device Explorer.qtz */,
 				D86D0E5D13EB69D50054AA86 /* Arduino Bidirectional.qtz */,
+				D86D0E6113EB74410054AA86 /* pin13.pde */,
 			);
 			path = BircherMuesli;
 			sourceTree = "<group>";
