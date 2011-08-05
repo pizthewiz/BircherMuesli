@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D80CAA6E1394887F00F6F861 /* AMSerialPortAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9F113906847001FE2A5 /* AMSerialPortAdditions.m */; };
+		D86D0E5E13EB69D50054AA86 /* Arduino Bidirectional.qtz in Resources */ = {isa = PBXBuildFile; fileRef = D86D0E5D13EB69D50054AA86 /* Arduino Bidirectional.qtz */; };
+		D86D0E6013EB6AE40054AA86 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFA9AB138F406D001FE2A5 /* AppKit.framework */; };
 		D8A4E56C1390A4CA006AD752 /* BMDeviceReaderPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A4E56B1390A4CA006AD752 /* BMDeviceReaderPlugIn.m */; };
-		D8AFA9A7138F406D001FE2A5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFA9A6138F406D001FE2A5 /* Cocoa.framework */; };
 		D8AFA9A9138F406D001FE2A5 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFA9A8138F406D001FE2A5 /* Quartz.framework */; };
 		D8AFA9B5138F406D001FE2A5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8AFA9B3138F406D001FE2A5 /* InfoPlist.strings */; };
 		D8AFA9B9138F406D001FE2A5 /* BMDeviceListPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AFA9B8138F406D001FE2A5 /* BMDeviceListPlugIn.m */; };
@@ -22,11 +23,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D86D0E5D13EB69D50054AA86 /* Arduino Bidirectional.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = "Arduino Bidirectional.qtz"; sourceTree = SOURCE_ROOT; };
 		D8A4E5681390736D006AD752 /* Device Explorer.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = "Device Explorer.qtz"; sourceTree = SOURCE_ROOT; };
 		D8A4E56A1390A4CA006AD752 /* BMDeviceReaderPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMDeviceReaderPlugIn.h; sourceTree = "<group>"; };
 		D8A4E56B1390A4CA006AD752 /* BMDeviceReaderPlugIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMDeviceReaderPlugIn.m; sourceTree = "<group>"; };
 		D8AFA9A3138F406D001FE2A5 /* BircherMuesli.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BircherMuesli.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8AFA9A6138F406D001FE2A5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D8AFA9A8138F406D001FE2A5 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		D8AFA9AB138F406D001FE2A5 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		D8AFA9AD138F406D001FE2A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -58,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8AFA9A7138F406D001FE2A5 /* Cocoa.framework in Frameworks */,
+				D86D0E6013EB6AE40054AA86 /* AppKit.framework in Frameworks */,
 				D8AFA9A9138F406D001FE2A5 /* Quartz.framework in Frameworks */,
 				D8AFAA0C139069F1001FE2A5 /* IOKit.framework in Frameworks */,
 			);
@@ -88,7 +89,6 @@
 		D8AFA9A5138F406D001FE2A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D8AFA9A6138F406D001FE2A5 /* Cocoa.framework */,
 				D8AFA9A8138F406D001FE2A5 /* Quartz.framework */,
 				D8AFAA011390697B001FE2A5 /* IOKit.framework */,
 				D8AFA9AA138F406D001FE2A5 /* Other Frameworks */,
@@ -121,6 +121,7 @@
 				D8AFA9D6138F4DA3001FE2A5 /* TODO */,
 				D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG */,
 				D8A4E5681390736D006AD752 /* Device Explorer.qtz */,
+				D86D0E5D13EB69D50054AA86 /* Arduino Bidirectional.qtz */,
 			);
 			path = BircherMuesli;
 			sourceTree = "<group>";
@@ -206,6 +207,7 @@
 				D8AFA9B5138F406D001FE2A5 /* InfoPlist.strings in Resources */,
 				D8AFA9E813906264001FE2A5 /* Localizable.strings in Resources */,
 				D8FC241513E34C860089055F /* Device Explorer.qtz in Resources */,
+				D86D0E5E13EB69D50054AA86 /* Arduino Bidirectional.qtz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,3 +21,4 @@
 #define CCLocalizedString(key, comment) [[NSBundle bundleForClass:[self class]] localizedStringForKey:(key) value:@"" table:(nil)]
 
 static NSString* const BMExampleCompositionName = @"Device Explorer";
+static NSString* const BMExampleArduinoCompositionName = @"Arduino Bidirectional";
