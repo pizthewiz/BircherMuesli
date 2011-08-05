@@ -1,4 +1,8 @@
 
+v0.3.3 (4 Aug 2011)
+* revise device explorer composition to display a list of all avaiable serial ports
+* add arduino sketch and example composition to demonstrate identification and simple read and write
+
 v0.3.2 (29 July 2011)
 * bundle example composition into plug-in and assign categories for lion
 

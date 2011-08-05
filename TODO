@@ -1,14 +1,15 @@
 
 GENERAL
-[ ] add basic arduino sketch and composition - toggle LED on pin 13 based on serial input, send state
+[X] add basic arduino sketch and composition - toggle LED on pin 13 based on serial input, send state
 
+-------------------------------------------------
 DEVICE LIST
 NOW
 [X] vendor AMSerialPort
 [X] expose List Updated output
 [X] add simple javascript search over list
 LATER
-[ ] offer simple filter in inspector
+[ ] offer simple filter in inspector?
 [ ] struct of structs {bsdPath, name, type, isAvailable}
 
 -------------------------------------------------
