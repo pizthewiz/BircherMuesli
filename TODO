@@ -23,6 +23,7 @@ LATER
 -------------------------------------------------
 DEVICE WRITE
 NOW
+[ ] support binary data
 [ ] some sort of delayed retry on busy device on replug
 [ ] flush output on connect?
 LATER
