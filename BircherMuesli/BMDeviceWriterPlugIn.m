@@ -11,6 +11,7 @@
 #import "AMSerialPort.h"
 #import "AMSerialPortAdditions.h"
 #import "AMSerialPortList.h"
+#import "NSString+CCExtensions.h"
 
 @interface BMDeviceWriterPlugIn()
 @property (nonatomic, retain) AMSerialPort* serialPort;
@@ -24,7 +25,7 @@
 @implementation BMDeviceWriterPlugIn
 
 @dynamic inputDevicePath, inputDeviceBaudRate, inputData, inputSendSignal;
-@synthesize serialPort = _serialPort, devicePath = _devicePath;
+@synthesize serialPort = _serialPort, devicePath = _devicePath, shouldSendDataAsASCII = _shouldSendDataAsASCII;
 
 + (NSDictionary*)attributes {
     NSMutableDictionary* attributes = [NSMutableDictionary dictionaryWithObjectsAndKeys: 
@@ -64,7 +65,7 @@
 	return nil;
 }
 
-+ (QCPlugInExecutionMode)executionMode{
++ (QCPlugInExecutionMode)executionMode {
 	return kQCPlugInExecutionModeConsumer;
 }
 
@@ -72,7 +73,19 @@
 	return kQCPlugInTimeModeIdle;
 }
 
++ (NSArray*)plugInKeys {
+    return [NSArray arrayWithObjects:@"shouldSendDataAsASCII", nil];
+}
+
 #pragma mark -
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.shouldSendDataAsASCII = YES;
+    }
+    return self;
+}
 
 - (void)finalize {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -86,6 +99,32 @@
     [self _tearDownSerialDevice];
 
 	[super dealloc];
+}
+
+#pragma mark -
+
+- (id)serializedValueForKey:(NSString*)key {
+    CCDebugLogSelector();
+
+    id value = nil;
+    if ([key isEqualToString:@"shouldSendDataAsASCII"])
+        value = [NSNumber numberWithBool:self.shouldSendDataAsASCII];
+    else
+	    value = [super serializedValueForKey:key];
+    return value;
+}
+
+- (void)setSerializedValue:(id)serializedValue forKey:(NSString*)key {
+    CCDebugLogSelector();
+
+    if ([key isEqualToString:@"shouldSendDataAsASCII"])
+        self.shouldSendDataAsASCII = [serializedValue boolValue];
+    else
+	    [super setSerializedValue:serializedValue forKey:key];
+}
+
+- (QCPlugInViewController*)createViewController {
+	return [[QCPlugInViewController alloc] initWithPlugIn:self viewNibName:@"Settings"];
 }
 
 #pragma mark - EXECUTION
@@ -152,7 +191,23 @@
             CCErrorLog(@"ERROR - attempting to write to closed serial port '%@'", self.serialPort.name);
             return NO;
         }
-        NSData* data = [self.inputData dataUsingEncoding:NSUTF8StringEncoding];
+
+        NSData* data = nil;
+        if (self.shouldSendDataAsASCII) {
+            data = [self.inputData dataUsingEncoding:NSUTF8StringEncoding];
+        } else {
+            CCErrorLog(@"ERROR - non-ASCII data is not yet supported");
+/*
+            if ([self.inputData containsOnlyBinaryCharacters]) {
+                CCDebugLog(@"could be binary");
+            }
+            if ([self.inputData containsOnlyHexidecimalCharacters]) {
+                CCDebugLog(@"could be hex");
+            }
+            NSUInteger integerData = [self.inputData integerValue];
+            data = [NSData dataWithBytes:&integerData length:sizeof(integerData)];
+*/
+        }
         [self.serialPort writeDataInBackground:data];
     }
 

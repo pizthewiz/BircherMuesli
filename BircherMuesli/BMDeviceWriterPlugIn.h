@@ -14,9 +14,12 @@
     AMSerialPort* _serialPort;
     NSString* _devicePath;
     NSUInteger _deviceBaudRate;
+    BOOL _shouldSendDataAsASCII;
 }
 @property (nonatomic, assign) NSString* inputDevicePath;
 @property (nonatomic) NSUInteger inputDeviceBaudRate;
 @property (nonatomic, assign) NSString* inputData;
 @property (nonatomic) BOOL inputSendSignal;
+
+@property (nonatomic) BOOL shouldSendDataAsASCII;
 @end

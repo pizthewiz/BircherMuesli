@@ -11,6 +11,7 @@
 		D86D0E5E13EB69D50054AA86 /* Arduino Bidirectional.qtz in Resources */ = {isa = PBXBuildFile; fileRef = D86D0E5D13EB69D50054AA86 /* Arduino Bidirectional.qtz */; };
 		D86D0E6013EB6AE40054AA86 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFA9AB138F406D001FE2A5 /* AppKit.framework */; };
 		D88B857C13F07782003A11A8 /* NSString+CCExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D88B857B13F07782003A11A8 /* NSString+CCExtensions.m */; };
+		D88B85A113F0A64F003A11A8 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88B85A013F0A64F003A11A8 /* Settings.xib */; };
 		D8A4E56C1390A4CA006AD752 /* BMDeviceReaderPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A4E56B1390A4CA006AD752 /* BMDeviceReaderPlugIn.m */; };
 		D8AFA9A9138F406D001FE2A5 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AFA9A8138F406D001FE2A5 /* Quartz.framework */; };
 		D8AFA9B5138F406D001FE2A5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8AFA9B3138F406D001FE2A5 /* InfoPlist.strings */; };
@@ -28,6 +29,7 @@
 		D86D0E6113EB74410054AA86 /* pin13.pde */ = {isa = PBXFileReference; lastKnownFileType = text; path = pin13.pde; sourceTree = SOURCE_ROOT; };
 		D88B857A13F07782003A11A8 /* NSString+CCExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CCExtensions.h"; sourceTree = "<group>"; };
 		D88B857B13F07782003A11A8 /* NSString+CCExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CCExtensions.m"; sourceTree = "<group>"; };
+		D88B85A013F0A64F003A11A8 /* Settings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Settings.xib; sourceTree = "<group>"; };
 		D8A4E5681390736D006AD752 /* Device Explorer.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = "Device Explorer.qtz"; sourceTree = SOURCE_ROOT; };
 		D8A4E56A1390A4CA006AD752 /* BMDeviceReaderPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMDeviceReaderPlugIn.h; sourceTree = "<group>"; };
 		D8A4E56B1390A4CA006AD752 /* BMDeviceReaderPlugIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMDeviceReaderPlugIn.m; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				D8AFA9B3138F406D001FE2A5 /* InfoPlist.strings */,
 				D8AFA9B6138F406D001FE2A5 /* BircherMuesli-Prefix.pch */,
 				D8AFA9E713906264001FE2A5 /* Localizable.strings */,
+				D88B85A013F0A64F003A11A8 /* Settings.xib */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				D8AFA9E813906264001FE2A5 /* Localizable.strings in Resources */,
 				D8FC241513E34C860089055F /* Device Explorer.qtz in Resources */,
 				D86D0E5E13EB69D50054AA86 /* Arduino Bidirectional.qtz in Resources */,
+				D88B85A113F0A64F003A11A8 /* Settings.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
