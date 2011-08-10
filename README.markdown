@@ -1,6 +1,6 @@
 
 # Bircher Muesli
-a quartz composer plug-in for the discovery of, reading from and writing to serial devices.
+a quartz composer patch for the discovery of, reading from and writing to serial devices.
 
 ### HOW TO INSTALL
 move BircherMuesli.plugin into ~/Library/Graphics/Quartz Composer Plug-Ins/
@@ -13,5 +13,5 @@ move BircherMuesli.plugin into ~/Library/Graphics/Quartz Composer Plug-Ins/
 ### THANKS
 - Andreas Mayer / Nick Zitzmann / Sean McBride for [AMSerialPort](https://github.com/pizthewiz/AMSerialPort/)
 - Anton Marini (vade) for pointing me to AMSerialPort
-- Matti Niinimäki for the Månsteri Serial Out plug-in inspiration
+- Matti Niinimäki for the Månsteri Serial Out patch inspiration
 - dang&#96;r&#96;us for javascript patch help
