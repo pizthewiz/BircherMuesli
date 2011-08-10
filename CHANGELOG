@@ -1,4 +1,7 @@
 
+v0.3.4 (9 Aug 2011)
+* fix plugin loading problem on 10.6 when built on 10.7
+
 v0.3.3 (4 Aug 2011)
 * revise device explorer composition to display a list of all avaiable serial ports
 * add arduino sketch and example composition to demonstrate identification and simple read and write

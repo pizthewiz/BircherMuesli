@@ -20,5 +20,9 @@
 
 #define CCLocalizedString(key, comment) [[NSBundle bundleForClass:[self class]] localizedStringForKey:(key) value:@"" table:(nil)]
 
+// WORKAROUND - radar://problem/9927446 Lion added QCPlugInAttribute key constants not weak linked
+#pragma weak QCPlugInAttributeCategoriesKey
+#pragma weak QCPlugInAttributeExamplesKey
+
 static NSString* const BMExampleCompositionName = @"Device Explorer";
 static NSString* const BMExampleArduinoCompositionName = @"Arduino Bidirectional";
