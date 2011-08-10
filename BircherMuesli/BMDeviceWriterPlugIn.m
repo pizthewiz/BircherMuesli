@@ -82,7 +82,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.shouldSendDataAsASCII = YES;
+        _shouldSendDataAsASCII = YES;
     }
     return self;
 }
