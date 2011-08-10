@@ -14,12 +14,12 @@ v0.3.1 (02 June 2011)
 * improve error reporting on failure to open device
 
 v0.3.0 (31 May 2011)
-* add Serial Writer patch
+* add Serial Writer subpatch
 * reader and writer now support stop/start
 
 v0.2.0 (30 May 2011)
-* add Serial Reader patch
-* offer List Updated output from device list patch
+* add Serial Reader subpatch
+* offer List Updated output from device list subpatch
 
 v0.1.0 (27 May 2011)
-* initial release, contains serial device list patch only
+* initial release, contains serial device list subpatch only
