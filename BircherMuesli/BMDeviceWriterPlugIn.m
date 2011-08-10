@@ -193,7 +193,7 @@
         }
 
         NSData* data = nil;
-        if (self.shouldSendDataAsASCII) {
+        if (YES/*self.shouldSendDataAsASCII*/) {
             data = [self.inputData dataUsingEncoding:NSASCIIStringEncoding]; // 0..127 only
         } else {
             CCErrorLog(@"ERROR - non-ASCII data is not yet supported");
