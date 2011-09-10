@@ -197,13 +197,18 @@
             data = [self.inputData dataUsingEncoding:NSASCIIStringEncoding]; // 0..127 only
         } else {
             if ([self.inputData isLikleyBinaryString]) {
+                CCWarningLog(@"WARNING - binary is not yet supported");
 //                data = [self.inputData dataForBinaryValue];
             } else if ([self.inputData isLikleyHexString]) {
                 data = [self.inputData dataForHexValue];
             }
         }
-        CCDebugLog(@"sending data: %@", data);
-        [self.serialPort writeDataInBackground:data];
+        if (!data) {
+            CCErrorLog(@"ERROR - no data generated to send");
+        } else {
+            CCDebugLog(@"sending data: %@", data);
+            [self.serialPort writeDataInBackground:data];        
+        }
     }
 
 	return YES;
