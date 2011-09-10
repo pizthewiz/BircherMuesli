@@ -47,16 +47,37 @@
 
 @implementation NSString(CCExtensions)
 
-- (BOOL)containsOnlyBinaryCharacters {
-    NSRange range = [self rangeOfCharacterFromSet:[NSCharacterSet binaryCharacterSet]];
-    BOOL status = range.length == [self length];
+- (BOOL)isLikleyBinaryString {
+    BOOL status = [[self stringByTrimmingCharactersInSet:[NSCharacterSet binaryCharacterSet]] isEqualToString:@""];
     return status;
 }
 
-- (BOOL)containsOnlyHexidecimalCharacters {
-    NSRange range = [self rangeOfCharacterFromSet:[NSCharacterSet hexidecimalCharacterSet] options:NSCaseInsensitiveSearch];
-    BOOL status = range.length == [self length];
+- (BOOL)isLikleyHexString {
+    BOOL hasHexPrefix = [[self lowercaseString] hasPrefix:@"0x"];
+    NSString* string = hasHexPrefix ? [self substringWithRange:NSMakeRange(2, self.length-2)] : self;
+    BOOL status = [[[string uppercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet hexidecimalCharacterSet]] isEqualToString:@""];
     return status;
+}
+
+- (NSData*)dataForBinaryValue {
+    return nil;
+}
+
+- (NSData*)dataForHexValue {
+    NSMutableData* data = [NSMutableData data];
+    if (self.length % 2) {
+        return nil;
+    }
+
+    for (NSUInteger start = 0; start < self.length; start+=2) {
+        NSString* byteString = [self substringWithRange:NSMakeRange(start, 2)];
+        NSScanner* scanner = [NSScanner scannerWithString:byteString];
+        unsigned int value = 0;
+        [scanner scanHexInt:&value];
+        [data appendBytes:&value length:1];
+    }
+
+    return (NSData*)data;
 }
 
 @end

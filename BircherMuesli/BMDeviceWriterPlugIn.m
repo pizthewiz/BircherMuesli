@@ -193,22 +193,16 @@
         }
 
         NSData* data = nil;
-        if (YES/*self.shouldSendDataAsASCII*/) {
+        if (NO/*self.shouldSendDataAsASCII*/) {
             data = [self.inputData dataUsingEncoding:NSASCIIStringEncoding]; // 0..127 only
         } else {
-            CCErrorLog(@"ERROR - non-ASCII data is not yet supported");
-            return NO;
-/*
-            if ([self.inputData containsOnlyBinaryCharacters]) {
-                CCDebugLog(@"could be binary");
+            if ([self.inputData isLikleyBinaryString]) {
+//                data = [self.inputData dataForBinaryValue];
+            } else if ([self.inputData isLikleyHexString]) {
+                data = [self.inputData dataForHexValue];
             }
-            if ([self.inputData containsOnlyHexidecimalCharacters]) {
-                CCDebugLog(@"could be hex");
-            }
-            NSUInteger integerData = [self.inputData integerValue];
-            data = [NSData dataWithBytes:&integerData length:sizeof(integerData)];
-*/
         }
+        CCDebugLog(@"sending data: %@", data);
         [self.serialPort writeDataInBackground:data];
     }
 

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString(CCExtensions)
-- (BOOL)containsOnlyBinaryCharacters;
-- (BOOL)containsOnlyHexidecimalCharacters;
+- (BOOL)isLikleyBinaryString;
+- (BOOL)isLikleyHexString;
+- (NSData*)dataForBinaryValue;
+- (NSData*)dataForHexValue;
 @end
