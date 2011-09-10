@@ -193,7 +193,7 @@
         }
 
         NSData* data = nil;
-        if (NO/*self.shouldSendDataAsASCII*/) {
+        if (self.shouldSendDataAsASCII) {
             data = [self.inputData dataUsingEncoding:NSASCIIStringEncoding]; // 0..127 only
         } else {
             if ([self.inputData isLikleyBinaryString]) {
