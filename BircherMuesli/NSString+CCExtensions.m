@@ -60,16 +60,34 @@
 }
 
 - (NSData*)dataForBinaryValue {
+/*
+    if (self.length % 8) {
+        // not really sure what the expected padding behavior would otherwise be
+        return nil;
+    }
+
+    NSMutableData* data = [NSMutableData data];
+    for (NSUInteger start = 0; start < self.length; start+=8) {
+        NSString* bitString = [self substringWithRange:NSMakeRange(start, 8)];
+        NSScanner* scanner = [NSScanner scannerWithString:bitString];
+        unsigned int value = 0;
+        [scanner scanHexInt:&value];
+        [data appendBytes:&value length:1];
+    }
+    return (NSData*)data;
+*/
     return nil;
 }
 
 - (NSData*)dataForHexValue {
-    NSMutableData* data = [NSMutableData data];
     if (self.length % 2) {
+        // not really sure what the expected padding behavior would otherwise be
         return nil;
     }
 
-    for (NSUInteger start = 0; start < self.length; start+=2) {
+    BOOL hasHexPrefix = [[self lowercaseString] hasPrefix:@"0x"];
+    NSMutableData* data = [NSMutableData data];
+    for (NSUInteger start = hasHexPrefix ? 2 : 0; start < self.length; start+=2) {
         NSString* byteString = [self substringWithRange:NSMakeRange(start, 2)];
         NSScanner* scanner = [NSScanner scannerWithString:byteString];
         unsigned int value = 0;
