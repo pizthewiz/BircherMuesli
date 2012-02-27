@@ -1,6 +1,7 @@
 
 GENERAL
 [X] add basic arduino sketch and composition - toggle LED on pin 13 based on serial input, send state
+[ ] migrate to ARC
 
 -------------------------------------------------
 DEVICE LIST
