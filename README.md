@@ -1,6 +1,6 @@
 
 # Bircher Muesli
-a quartz composer patch for the discovery of, reading from and writing to serial devices.
+a quartz composer plug-in for the discovery of, reading from and writing to serial devices.
 
 ### HOW TO INSTALL
 move BircherMuesli.plugin into ~/Library/Graphics/Quartz Composer Plug-Ins/

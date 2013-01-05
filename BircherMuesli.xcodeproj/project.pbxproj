@@ -43,9 +43,9 @@
 		D8AFA9B6138F406D001FE2A5 /* BircherMuesli-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BircherMuesli-Prefix.pch"; sourceTree = "<group>"; };
 		D8AFA9B7138F406D001FE2A5 /* BMDeviceListPlugIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMDeviceListPlugIn.h; sourceTree = "<group>"; };
 		D8AFA9B8138F406D001FE2A5 /* BMDeviceListPlugIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMDeviceListPlugIn.m; sourceTree = "<group>"; };
-		D8AFA9D2138F4D9A001FE2A5 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = SOURCE_ROOT; };
-		D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = SOURCE_ROOT; };
-		D8AFA9D6138F4DA3001FE2A5 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = SOURCE_ROOT; };
+		D8AFA9D2138F4D9A001FE2A5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
+		D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = SOURCE_ROOT; };
+		D8AFA9D6138F4DA3001FE2A5 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.md; sourceTree = SOURCE_ROOT; };
 		D8AFA9D7138F4E3B001FE2A5 /* BircherMuesli.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BircherMuesli.h; sourceTree = "<group>"; };
 		D8AFA9E713906264001FE2A5 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		D8AFA9EB13906847001FE2A5 /* AMSerialErrors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMSerialErrors.h; sourceTree = "<group>"; };
@@ -124,9 +124,9 @@
 				D88B857A13F07782003A11A8 /* NSString+CCExtensions.h */,
 				D88B857B13F07782003A11A8 /* NSString+CCExtensions.m */,
 				D8AFA9B1138F406D001FE2A5 /* Supporting Files */,
-				D8AFA9D2138F4D9A001FE2A5 /* README.markdown */,
-				D8AFA9D6138F4DA3001FE2A5 /* TODO */,
-				D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG */,
+				D8AFA9D2138F4D9A001FE2A5 /* README.md */,
+				D8AFA9D6138F4DA3001FE2A5 /* TODO.md */,
+				D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG.md */,
 				D8A172AD1697B729002CFCC8 /* Jakefile.js */,
 				D8A4E5681390736D006AD752 /* Device Explorer.qtz */,
 				D86D0E5D13EB69D50054AA86 /* Arduino Bidirectional.qtz */,
