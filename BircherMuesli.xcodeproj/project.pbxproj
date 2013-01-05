@@ -74,11 +74,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D8A172AE1697B944002CFCC8 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				D8AFA9E913906847001FE2A5 /* AMSerialPort */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
 		D8AFA997138F406D001FE2A5 = {
 			isa = PBXGroup;
 			children = (
 				D8AFA9B0138F406D001FE2A5 /* BircherMuesli */,
-				D8AFA9E913906847001FE2A5 /* AMSerialPort */,
 				D8AFA9A5138F406D001FE2A5 /* Frameworks */,
 				D8AFA9A4138F406D001FE2A5 /* Products */,
 			);
@@ -123,6 +130,7 @@
 				D8C4E5E21394C97F00D9565E /* BMDeviceWriterPlugIn.m */,
 				D88B857A13F07782003A11A8 /* NSString+CCExtensions.h */,
 				D88B857B13F07782003A11A8 /* NSString+CCExtensions.m */,
+				D8A172AE1697B944002CFCC8 /* Vendor */,
 				D8AFA9B1138F406D001FE2A5 /* Supporting Files */,
 				D8AFA9D2138F4D9A001FE2A5 /* README.md */,
 				D8AFA9D6138F4DA3001FE2A5 /* TODO.md */,
@@ -159,7 +167,7 @@
 				D8AFA9F313906847001FE2A5 /* AMSerialPortList.m */,
 			);
 			name = AMSerialPort;
-			path = vendor/AMSerialPort/SharedCode;
+			path = ../vendor/AMSerialPort/SharedCode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
