@@ -30,6 +30,7 @@
 		D88B857A13F07782003A11A8 /* NSString+CCExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CCExtensions.h"; sourceTree = "<group>"; };
 		D88B857B13F07782003A11A8 /* NSString+CCExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CCExtensions.m"; sourceTree = "<group>"; };
 		D88B85A013F0A64F003A11A8 /* Settings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Settings.xib; sourceTree = "<group>"; };
+		D8A172AD1697B729002CFCC8 /* Jakefile.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Jakefile.js; sourceTree = "<group>"; };
 		D8A4E5681390736D006AD752 /* Device Explorer.qtz */ = {isa = PBXFileReference; lastKnownFileType = "video.quartz-composer"; path = "Device Explorer.qtz"; sourceTree = SOURCE_ROOT; };
 		D8A4E56A1390A4CA006AD752 /* BMDeviceReaderPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMDeviceReaderPlugIn.h; sourceTree = "<group>"; };
 		D8A4E56B1390A4CA006AD752 /* BMDeviceReaderPlugIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMDeviceReaderPlugIn.m; sourceTree = "<group>"; };
@@ -44,7 +45,6 @@
 		D8AFA9B8138F406D001FE2A5 /* BMDeviceListPlugIn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BMDeviceListPlugIn.m; sourceTree = "<group>"; };
 		D8AFA9D2138F4D9A001FE2A5 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = SOURCE_ROOT; };
 		D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = SOURCE_ROOT; };
-		D8AFA9D5138F4DA3001FE2A5 /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = SOURCE_ROOT; };
 		D8AFA9D6138F4DA3001FE2A5 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = SOURCE_ROOT; };
 		D8AFA9D7138F4E3B001FE2A5 /* BircherMuesli.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BircherMuesli.h; sourceTree = "<group>"; };
 		D8AFA9E713906264001FE2A5 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -125,9 +125,9 @@
 				D88B857B13F07782003A11A8 /* NSString+CCExtensions.m */,
 				D8AFA9B1138F406D001FE2A5 /* Supporting Files */,
 				D8AFA9D2138F4D9A001FE2A5 /* README.markdown */,
-				D8AFA9D5138F4DA3001FE2A5 /* Rakefile */,
 				D8AFA9D6138F4DA3001FE2A5 /* TODO */,
 				D8AFA9D4138F4DA3001FE2A5 /* CHANGELOG */,
+				D8A172AD1697B729002CFCC8 /* Jakefile.js */,
 				D8A4E5681390736D006AD752 /* Device Explorer.qtz */,
 				D86D0E5D13EB69D50054AA86 /* Arduino Bidirectional.qtz */,
 				D86D0E6113EB74410054AA86 /* pin13.pde */,
@@ -172,7 +172,7 @@
 				D8AFA99E138F406D001FE2A5 /* Sources */,
 				D8AFA99F138F406D001FE2A5 /* Frameworks */,
 				D8AFA9A0138F406D001FE2A5 /* Resources */,
-				D8AFA9CB138F4AC1001FE2A5 /* Update Info.plist With git Info */,
+				D8AFA9CB138F4AC1001FE2A5 /* Update Bundle Version */,
 				D8AFA9A1138F406D001FE2A5 /* Copy Plug-In Into Place */,
 			);
 			buildRules = (
@@ -190,7 +190,7 @@
 		D8AFA999138F406D001FE2A5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = D8AFA99C138F406D001FE2A5 /* Build configuration list for PBXProject "BircherMuesli" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -239,19 +239,19 @@
 			shellPath = /bin/sh;
 			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/BircherMuesli.plugin\"\nditto \"$BUILT_PRODUCTS_DIR/BircherMuesli.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/BircherMuesli.plugin\"\n";
 		};
-		D8AFA9CB138F4AC1001FE2A5 /* Update Info.plist With git Info */ = {
+		D8AFA9CB138F4AC1001FE2A5 /* Update Bundle Version */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Update Info.plist With git Info";
+			name = "Update Bundle Version";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/macrake update_bundle_version\n";
+			shellScript = "if [ -f /usr/local/bin/jake ]; then\n    PATH=$PATH:/usr/local/bin jake update\nelse\n    echo \"WARNING - could not find jake, bundle versions left unset\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -288,6 +288,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -299,8 +303,9 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
@@ -312,6 +317,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					DEBUG,
@@ -321,8 +330,9 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
 				WARNING_CFLAGS = "-Wall";
@@ -333,6 +343,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -350,6 +361,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
