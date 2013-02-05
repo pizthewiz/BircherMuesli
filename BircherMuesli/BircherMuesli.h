@@ -3,7 +3,7 @@
 //  BircherMuesli
 //
 //  Created by Jean-Pierre Mouilleseaux on 26 May 2011.
-//  Copyright 2011 Chorded Constructions. All rights reserved.
+//  Copyright 2011, 2013 Chorded Constructions. All rights reserved.
 //
 
 #ifdef DEBUG
@@ -19,10 +19,6 @@
 #endif
 
 #define CCLocalizedString(key, comment) [[NSBundle bundleForClass:[self class]] localizedStringForKey:(key) value:@"" table:(nil)]
-
-// WORKAROUND - radar://problem/9927446 Lion added QCPlugInAttribute key constants not weak linked
-#pragma weak QCPlugInAttributeCategoriesKey
-#pragma weak QCPlugInAttributeExamplesKey
 
 static NSString* const BMExampleCompositionName = @"Device Explorer";
 static NSString* const BMExampleArduinoCompositionName = @"Arduino Bidirectional";
