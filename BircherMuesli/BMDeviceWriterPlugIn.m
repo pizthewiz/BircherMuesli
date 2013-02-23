@@ -90,7 +90,7 @@
 #pragma mark -
 
 - (id)serializedValueForKey:(NSString*)key {
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     id value = nil;
     if ([key isEqualToString:@"shouldSendDataAsASCII"])
@@ -101,7 +101,7 @@
 }
 
 - (void)setSerializedValue:(id)serializedValue forKey:(NSString*)key {
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     if ([key isEqualToString:@"shouldSendDataAsASCII"])
         self.shouldSendDataAsASCII = [serializedValue boolValue];
@@ -121,7 +121,7 @@
      Return NO in case of fatal failure (this will prevent rendering of the composition to start).
      */
 
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
 	return YES;
 }
@@ -131,7 +131,7 @@
      Called by Quartz Composer when the plug-in instance starts being used by Quartz Composer.
      */
 
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     // setup serial port when possible
     if (self.devicePath && _deviceBaudRate)
@@ -192,8 +192,8 @@
         if (!data) {
             CCErrorLog(@"ERROR - no data generated to send");
         } else {
-            CCDebugLog(@"sending data: %@", data);
-            [self.serialPort writeDataInBackground:data];        
+//            CCDebugLog(@"sending data: %@", data);
+            [self.serialPort writeDataInBackground:data];
         }
     }
 
@@ -205,7 +205,7 @@
      Called by Quartz Composer when the plug-in instance stops being used by Quartz Composer.
      */
 
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     [self _tearDownSerialDevice];
 }
@@ -215,19 +215,19 @@
      Called by Quartz Composer when rendering of the composition stops: perform any required cleanup for the plug-in.
      */
 
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 }
 
 #pragma mark - SERIAL PORT DELEGATE
 
 - (void)serialPort:(AMSerialPort*)port didMakeWriteProgress:(NSUInteger)progress total:(NSUInteger)total {
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 }
 
 #pragma mark - SERIAL PORT NOTIFICATIONS
 
 - (void)_didAddSerialPorts:(NSNotification*)notification {
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     AMSerialPort* serialPort = nil;
     NSArray* addedPorts = [[notification userInfo] objectForKey:AMSerialPortListAddedPorts];
@@ -246,7 +246,7 @@
 }
 
 - (void)_didRemoveSerialPorts:(NSNotification*)notification {
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     NSArray* removedPorts = [[notification userInfo] objectForKey:AMSerialPortListRemovedPorts];
     if (![removedPorts containsObject:self.serialPort])
@@ -261,7 +261,7 @@
 #pragma mark - PRIVATE
 
 - (void)_setupSerialDeviceWithPath:(NSString*)path atBaudRate:(NSUInteger)baudRate {
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     [self _tearDownSerialDevice];
 

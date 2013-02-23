@@ -87,7 +87,7 @@
      Return NO in case of fatal failure (this will prevent rendering of the composition to start).
      */
 
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
 	return YES;
 }
@@ -97,7 +97,7 @@
      Called by Quartz Composer when the plug-in instance starts being used by Quartz Composer.
      */
 
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     // setup serial port when possible
     if (self.devicePath && _deviceBaudRate)
@@ -151,7 +151,7 @@
      Called by Quartz Composer when the plug-in instance stops being used by Quartz Composer.
      */
 
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     [self _tearDownSerialDevice];
 }
@@ -161,13 +161,13 @@
      Called by Quartz Composer when rendering of the composition stops: perform any required cleanup for the plug-in.
      */
 
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 }
 
 #pragma mark - SERIAL PORT DELEGATE
 
 - (void)serialPort:(AMSerialPort*)serialPort didReadData:(NSData*)data {
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     if ([data length] > 0) {
         NSString* text = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
@@ -176,7 +176,7 @@
         [text release];
         // NB - sometimes receive phantom data only containing newline
         if ([trimmedText length]) {
-            CCDebugLog(@"READ: %@", trimmedText);
+//            CCDebugLog(@"READ: %@", trimmedText);
             [_data release];
             _data = [trimmedText retain];
             _dataChanged = YES;
@@ -192,7 +192,7 @@
 #pragma mark - SERIAL PORT NOTIFICATIONS
 
 - (void)_didAddSerialPorts:(NSNotification*)notification {
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     AMSerialPort* serialPort = nil;
     NSArray* addedPorts = [[notification userInfo] objectForKey:AMSerialPortListAddedPorts];
@@ -212,7 +212,7 @@
 
 
 - (void)_didRemoveSerialPorts:(NSNotification*)notification {
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     NSArray* removedPorts = [[notification userInfo] objectForKey:AMSerialPortListRemovedPorts];
     if (![removedPorts containsObject:self.serialPort])
@@ -227,7 +227,7 @@
 #pragma mark - PRIVATE
 
 - (void)_setupSerialDeviceWithPath:(NSString*)path atBaudRate:(NSUInteger)baudRate {
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     [self _tearDownSerialDevice];
 

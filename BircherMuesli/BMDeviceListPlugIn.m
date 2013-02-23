@@ -70,7 +70,7 @@
 	Return NO in case of fatal failure (this will prevent rendering of the composition to start).
 	*/
 
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
 	return YES;
 }
@@ -80,7 +80,7 @@
 	Called by Quartz Composer when the plug-in instance starts being used by Quartz Composer.
 	*/
 
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     [self _setupPortListening];
 }
@@ -109,7 +109,7 @@
 	Called by Quartz Composer when the plug-in instance stops being used by Quartz Composer.
 	*/
 
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     [self _tearDownPortListening];
 }
@@ -119,13 +119,13 @@
 	Called by Quartz Composer when rendering of the composition stops: perform any required cleanup for the plug-in.
 	*/
 
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 }
 
 #pragma mark - SERIAL PORT NOTIFICATIONS
 
 - (void)_didAddSerialPorts:(NSNotification*)notification {
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     NSArray* addedPorts = [[notification userInfo] objectForKey:AMSerialPortListAddedPorts];
     for (AMSerialPort* serialPort in addedPorts) {
@@ -138,7 +138,7 @@
 }
 
 - (void)_didRemoveSerialPorts:(NSNotification*)notification {
-    CCDebugLogSelector();
+//    CCDebugLogSelector();
 
     NSArray* removedPorts = [[notification userInfo] objectForKey:AMSerialPortListRemovedPorts];
     for (AMSerialPort* serialPort in removedPorts) {
